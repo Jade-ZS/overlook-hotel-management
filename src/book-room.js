@@ -1,34 +1,44 @@
-/**
- * => matchRoomById
- * 
- * => getRoomByDate
- * arguments: date
- * return: available rooms
- * 
- * => getRoomByType
- * arguments: room type
- * return: available rooms
- * 
- * => return apology message
- * 
- * => return redirection message
- */
+// matchItem is not used here, might need to remove this
+const matchItem = (id, key, items) => {
+  if (typeof key !== 'string' || !Array.isArray(items)) {
+    return 'matchItem Error: wrong input type';
+  }
 
-const matchItem = (id, items, key) => items.find(ele => ele[key] === id);
+  let output = items.find(ele => ele[key] === id);
+  output = output ? output : 'No matching item was found.'
+  return output;
+};
 
-// const matchUser = (userId, customers) => customers.find(customer => customer.id === userId);
-// const matchRoom = (roomNumber, rooms) => rooms.find(room => room.number === roomNumber);
+const checkDateFormat = date => {
+  const numbers = date.split('/');
+  if (numbers.length !== 3 && numbers.find(number => !parseInt(number))) {
+    return false;
+  } else {
+    return true;
+  }
+};
 
 const getRoomByDate = (date, bookings, rooms) => {
+  if (typeof date !== 'string' || !checkDateFormat || !Array.isArray(bookings) || !Array.isArray(rooms)) {
+    return 'getRoomByDate Error: wrong input type';
+  }
+
   let conflictedBookings = bookings.filter(booking => booking.date === date);
-  if (conflictedBookings.length === bookings.length) {
-    return 'We are sorry that no room is available for the date you selected. Please select a different date.'
+  let unavailableRoomNumbers = conflictedBookings.map(conflictedBooking => conflictedBooking.roomNumber);
+  let availableRooms = rooms.filter(room => !unavailableRoomNumbers.includes(room.number));
+
+  if (availableRooms.length) {
+    return availableRooms;
   } else {
-    return rooms.filter(room => !matchItem(room.number, conflictedBookings, 'roomNumber'));
+    return 'We are sorry that no room is available for the date you selected. Please select a different date.'
   }
 };
 
 const getRoomByType = (type, availableRooms) => {
+  if (typeof type !== 'string' || !Array.isArray(availableRooms)) {
+    return 'getRoomByType Error: wrong input type';
+  }
+
   let filteredResult = availableRooms.filter(room => room.roomType === type);
   if (!filteredResult.length) {
     return 'We are sorry that we do not have this room type available on the date you chose. Please try a different room type.'
@@ -36,3 +46,5 @@ const getRoomByType = (type, availableRooms) => {
     return filteredResult;
   }
 }; 
+
+export { matchItem, checkDateFormat, getRoomByDate, getRoomByType };
