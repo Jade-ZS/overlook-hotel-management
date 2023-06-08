@@ -30,7 +30,9 @@ describe('getMyBookings', function() {
   });
 
   it('should return a message if the customer does not have any booking on file', function() {
-    expect().to.equal();
+    expect(getMyBookings(6, sampleBookings)).to.equal('You don\'t have any booking.');
+    expect(getMyBookings(7, sampleBookings)).to.equal('You don\'t have any booking.');
+    expect(getMyBookings(8, sampleBookings)).to.equal('You don\'t have any booking.');
   });
 
 });
