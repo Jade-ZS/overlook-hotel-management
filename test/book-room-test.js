@@ -1,7 +1,5 @@
 import chai from 'chai';
-import { sampleBookings } from './sample-bookings';
-import { sampleRooms } from './sample-rooms';
-import { sampleCustomers } from './sample-customers';
+import { sampleBookings, sampleRooms, sampleCustomers } from './sample-data';
 import { matchItem, checkDateFormat, getRoomByDate, getRoomByType } from '../src/book-room'
 const expect = chai.expect;
 
