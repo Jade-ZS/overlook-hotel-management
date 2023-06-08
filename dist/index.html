@@ -7,16 +7,28 @@
   <title>Overlook Hotel Management Tool</title>
 </head>
 <body>
-  <section class="view login-view">
-    <lable for="username">username</lable>
-    <input id="username" type="text">
-    <lable for="password">password</lable>
-    <input id="password" type="text">
-    <button type="submit">Submit</button>
-  </section>
-  <main class="view dashboard-view">
-    <fieldset>my room bookings</fieldset>
-    <fieldset>total spending on rooms</fieldset>
+  <main>
+    <div class="view role-choice-view">
+      <p>Are you a customer or a manager?</p>
+      <button>customer</button>
+      <button>manager</button>
+    </div>
+    <div class="view login-view">
+      <lable for="username">username</lable>
+      <input id="username" type="text">
+      <lable for="password">password</lable>
+      <input id="password" type="text">
+      <button type="submit">Submit</button>
+    </div>
+    <div class="view customer-dashboard-view">
+      <fieldset>my room bookings</fieldset>
+      <fieldset>total spending on rooms</fieldset>
+    </div>
+    <div class="view manager-dashboard-view">
+      <fieldset>Total Rooms Available for today’s date</fieldset>
+      <fieldset>Total revenue for today’s date</fieldset>
+      <fieldset>Percentage of rooms occupied for today’s date</fieldset>
+    </div>
   </main>
   
 
