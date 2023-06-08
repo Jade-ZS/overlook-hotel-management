@@ -10,8 +10,6 @@ const matchItem = (id, key, items) => {
   return output;
 };
 
-// TO DO: add new booking function
-
 const checkDateFormat = date => {
   const numbers = date.split('/');
   if (numbers.length !== 3 && numbers.find(number => !parseInt(number))) {
