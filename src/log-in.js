@@ -1,4 +1,4 @@
-import { matchItem } from './book-room';
+import { matchItem } from './customer-get-room';
 
 const checkPassword = (userInput, correctPassword) => {
   if (userInput === correctPassword) {

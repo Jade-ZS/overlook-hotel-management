@@ -1,4 +1,4 @@
-import { matchItem } from './book-room';
+import { matchItem } from './customer-get-room';
 
 const getMyBookings = (userID, bookings) => {
   const myBookings = bookings.filter(booking => booking.userID === userID);
@@ -9,8 +9,8 @@ const getMyBookings = (userID, bookings) => {
   }
 };
 
-const getTotalSpending = (myBookings, rooms) => {
-  return myBookings.reduce((totalCost, currentBooking) => {
+const getTotalSpending = (bookings, rooms) => {
+  return bookings.reduce((totalCost, currentBooking) => {
     let cost = matchItem(currentBooking.roomNumber, 'number', rooms).costPerNight;
     totalCost += cost;
     return totalCost;

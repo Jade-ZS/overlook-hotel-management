@@ -1,6 +1,6 @@
 import chai from 'chai';
 import { sampleBookings, sampleRooms, sampleCustomers } from './sample-data';
-import { matchItem, checkDateFormat, getRoomByDate, getRoomByType } from '../src/book-room'
+import { matchItem, checkDateFormat, getRoomByDate, getRoomByType } from '../src/customer-get-room'
 const expect = chai.expect;
 
 // matchItem is not used, might need to get rid of this
