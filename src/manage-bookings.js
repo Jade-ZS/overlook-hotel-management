@@ -7,41 +7,33 @@ const getDateToday = () => {
   return todayFormatted;
 };
 
-const getAvailableRoomsToday = (bookings, rooms) => {
-  const today = getDateToday();
-  const availableRooms = getRoomByDate(today, bookings, rooms);
-  return availableRooms;
-};
-
-const getOccupiedRoomsToday = (bookings, rooms) => {
-  const availableRooms = getAvailableRoomsToday(bookings, rooms);
+const getOccupiedRoomsForDay = (date, bookings, rooms) => {
+  const availableRooms = getRoomByDate(date, bookings, rooms);
   const occupiedRooms = rooms.filter(room => !availableRooms.includes(room));
   return occupiedRooms;
 };
 
-const getBookingsToday = (bookings) => {
-  const today = getDateToday();
-  return bookings.filter(booking => booking.date === today);
+const getBookingsForDay = (date, bookings) => {
+  return bookings.filter(booking => booking.date === date);
 };
 
-const getRevenueToday = (bookings, rooms) => {
-  const bookingsToday = getBookingsToday(bookings);
-  const revenue = getTotalSpending(bookingsToday, rooms);
+const getRevenueForDay = (date, bookings, rooms) => {
+  const bookingsForDay = getBookingsForDay(date, bookings);
+  const revenue = getTotalSpending(bookingsForDay, rooms);
   return revenue;
 };
 
-const getOccupancyRateToday = (bookings, rooms) => {
-  const availableRooms = getAvailableRoomsToday(bookings, rooms);
+const getOccupancyRateForDay = (date, bookings, rooms) => {
+  const availableRooms = getRoomByDate(date, bookings, rooms);
   const percent = 100 * (rooms.length - availableRooms.length) / rooms.length;
   return `${percent}%`;
 }
 
 export { 
   getDateToday, 
-  getAvailableRoomsToday, 
-  getOccupiedRoomsToday, 
-  getBookingsToday, 
-  getRevenueToday, 
-  getOccupancyRateToday 
+  getOccupiedRoomsForDay, 
+  getBookingsForDay, 
+  getRevenueForDay, 
+  getOccupancyRateForDay 
 };
 
