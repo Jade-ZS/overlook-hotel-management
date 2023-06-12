@@ -28,7 +28,7 @@ const roomDetailView = document.querySelector('.room-detail-view');
 // buttons
 const customerButton = document.querySelector('#customer-button');
 const managerButton = document.querySelector('#manager-button');
-const backToRolesButtonconst = document.querySelector('#back-to-roles');
+const backToRolesButton = document.querySelector('#back-to-roles');
 const loginButton = document.querySelector('#login-button');
 
 // dashboard boxes
@@ -41,7 +41,28 @@ const usernameInput = document.querySelector('#username');
 const passwordInput = document.querySelector('#password');
 
 // event listeners
-customerButton.addEventListener('click', displayLogIn());
+customerButton.addEventListener('click', e => {
+  displayLogIn();
+});
+
+backToRolesButton.addEventListener('click', e => {
+  // TODO: add log in check call
+  displayRoleChoice();
+});
+
+loginButton.addEventListener('click', e => {
+  displayCustomerDashboard();
+});
+
+toMakeBookingBox.addEventListener('click', e => {
+  displayMakeBookings();
+});
+
+toMyBookingsBox.addEventListener('click', e => {
+  displayMyBookings();
+});
+
+
 
 
 
