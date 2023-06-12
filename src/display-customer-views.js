@@ -6,7 +6,6 @@ const displayLogIn = () => {
 
 };
 
-
 const displayCustomerDashboard = () => {
 
 };
