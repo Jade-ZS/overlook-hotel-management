@@ -34,11 +34,13 @@ const backToRolesButton = document.querySelector('#back-to-roles');
 const loginButton = document.querySelector('#login-button');
 const logoutButton = document.querySelector('.log-out-button');
 
-// dashboard boxes
+// boxes
 const homeSidebar = document.querySelector('.customer-dashboard-view .sidebar');
 const toMakeBookingBox = document.querySelector('.book-room');
 const toMyBookingsBox = document.querySelector('.my-booking');
 const toSpendingBox = document.querySelector('.spending');
+
+const myTripsBox = document.querySelector('.my-booking-details');
 
 // form
 const loginForm = document.querySelector('.login-view form');
@@ -78,20 +80,22 @@ logoutButton.addEventListener('click', e => {
 
 loginButton.addEventListener('click', e => {
   e.preventDefault();
-  loginForm.checkValidity()
   if (loginForm.checkValidity() && renderLoginCheck(userData)) {
     displayCustomerDashboard();
+    currentUser = userData.find(user => user.id === parseInt(usernameInput.value.substring(8)));
   } 
   renderLoginCheck(userData);
+
+});
+
+toMyBookingsBox.addEventListener('click', e => {
+  displayMyBookings(bookingsData, currentUser);
 });
 
 toMakeBookingBox.addEventListener('click', e => {
   displayMakeBookings();
 });
 
-toMyBookingsBox.addEventListener('click', e => {
-  displayMyBookings();
-});
 
 
 
@@ -109,5 +113,6 @@ export {
   usernameInput,
   passwordInput,
   invalidPasswordText,
-  invalidUserText
+  invalidUserText,
+  myTripsBox,
 };
