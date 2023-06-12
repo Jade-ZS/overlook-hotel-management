@@ -57,6 +57,20 @@ body {
   align-items: center;
 }
 
+#back-to-roles {
+  text-align: right;
+  width: 19rem;
+  opacity: 50%;
+  cursor: pointer;
+}
+
+#back-to-roles:hover {
+  text-decoration: underline;
+  color: #39603D;
+  font-weight: bold;
+  opacity: 1;
+}
+
 .card {
   background: #A3BCB6;
   opacity: 0.6;
@@ -80,6 +94,7 @@ body {
   width: 5rem;
 }
 
+/* customer dashboard */
 .grid-container {
   display: grid;
   grid-gap: 20px;
@@ -101,7 +116,8 @@ body {
 }
 
 aside,
-.customer-dashboard-view article {
+.grid-item,
+.flex-item {
   border: solid 2pt black;
   border-radius: 15pt;
   display: flex;
@@ -112,6 +128,17 @@ aside,
 .customer-dashboard-view article:hover {
   background: #A3BCB6;
 }
+
+/* my bookings */
+.my-bookings-view.grid-container {
+  grid-template-rows: 10vh 90vh;
+}
+
+.my-bookings-view .sidebar {
+  grid-row: 1/4;
+}
+
+
 
 /* others */
 .hidden {

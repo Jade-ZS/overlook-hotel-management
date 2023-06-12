@@ -45,4 +45,7 @@ const deleteSingleBooking = (id) => {
   .catch(err => alert(err));
 };
 
-export { getDataByFetch, addNewBooking, deleteSingleBooking };
+export { 
+  getDataByFetch, 
+  addNewBooking, 
+  deleteSingleBooking };
