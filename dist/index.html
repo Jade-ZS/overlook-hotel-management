@@ -7,24 +7,53 @@
   <title>Overlook Hotel Management Tool</title>
 </head>
 <body>
+  <section class="entrance-pages">
+    <div class="view column-view role-choice-view hidden">
+      <h1 class="center-text">Overlook</h1>
+      <p class="center-text">Are you a customer or a manager?</p>
+      <div class="flex-container">
+        <!-- TODO: add customer icon -->
+        <button>customer</button>
+        <!-- TODO: add manager icon -->
+        <button>manager</button>
+      </div>
+    </div>
+    <div class="view column-view login-view hidden">
+      <h1>Log In</h1>
+      <div class="card">
+        <div class="column-flex-container">
+          <lable for="username" class="hidden">username</lable>
+          <input id="username" type="text" placeholder="Enter username">
+          <span class="message hidden">Invalid username</span>
+        </div>
+        <div class="column-flex-container">
+          <lable for="password" class="hidden">password</lable>
+          <input id="password" type="password" placeholder="Password">
+          <span class="message hidden">Invalid password</span>
+        </div>
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+  </section>
   <main>
-    <div class="view role-choice-view">
-      <p>Are you a customer or a manager?</p>
-      <button>customer</button>
-      <button>manager</button>
+    <div class="view customer-dashboard-view grid-container">
+      <aside class="grid-item sidebar">my profile</aside>
+      <article class="grid-item book-room">booke a new room</article>
+      <div class="flex-container">
+        <article class="flex-item my-booking">my bookings</article>
+        <article class="flex-item spending">total spending on rooms</article>
+      </div>
     </div>
-    <div class="view login-view">
-      <lable for="username">username</lable>
-      <input id="username" type="text">
-      <lable for="password">password</lable>
-      <input id="password" type="text">
-      <button type="submit">Submit</button>
+    <div class="view my-bookings-view hidden">
+      <!-- my bookings will be displayed here -->
     </div>
-    <div class="view customer-dashboard-view">
-      <fieldset>my room bookings</fieldset>
-      <fieldset>total spending on rooms</fieldset>
+    <div class="view book-a-room-view hidden">
+      <!-- my bookings will be displayed here -->
     </div>
-    <div class="view manager-dashboard-view">
+    <div class="view room-detail-view hidden">
+      <!-- my bookings will be displayed here -->
+    </div>
+    <div class="view manager-dashboard-view hidden">
       <fieldset>Total Rooms Available for today’s date</fieldset>
       <fieldset>Total revenue for today’s date</fieldset>
       <fieldset>Percentage of rooms occupied for today’s date</fieldset>
