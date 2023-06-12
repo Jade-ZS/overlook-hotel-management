@@ -10,6 +10,7 @@ import {
   passwordInput,
   invalidPasswordText,
   invalidUserText,
+  myTripsBox,
 } from './scripts';
 
 import { 
@@ -76,10 +77,17 @@ const renderHomeSidebard = (user) => {
 }
 
 
-// 
-const renderMyBookings = () => {
-
+// my bookings
+const renderMyBookings = (booking) => {
+  myTripsBox.innerHTML += `
+      <tr> 
+        <td>${booking.date}</th>
+        <td>${booking.id}</th>
+      <tr>
+  `;
 };
+
+
 
 const renderMakeBookings = () => {
  
@@ -113,11 +121,16 @@ const displayCustomerDashboard = () => {
   
 };
 
-const displayMyBookings = () => {
+const displayMyBookings = (bookings, currentUser) => {
   const itemsToHide = [roleChoiceView, loginView, customerDashboard, makeBookingView, roomDetailView];
   const itemsToShow = [myBookingsView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
+
+  const myBookings = bookings.filter(booking => booking.userID === currentUser.id);
+  console.log('myBookings: ', myBookings)
+
+  myBookings.forEach(booking => renderMyBookings(booking));
 };
 
 const displayMakeBookings = () => {
