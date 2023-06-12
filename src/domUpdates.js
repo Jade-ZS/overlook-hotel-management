@@ -80,9 +80,12 @@ const renderHomeSidebard = (user) => {
 // my bookings
 const renderMyBookings = (booking) => {
   myTripsBox.innerHTML += `
-      <p> 
-        <span>${booking.date}</span>
-        <span>${booking.id}</span>
+      <p class=booking-item id=${booking.id}> 
+        <span class=booking-record-date>${booking.date}</span>
+        <span class=booking-record-order-number>${booking.id}</span>
+        <span class=booking-record-cost>cost</span>
+        <span class=booking-record-type>room type</span>
+        <button class=view-room-details-button>click to view room details</button>
       </p>
   `;
 };
