@@ -25,12 +25,12 @@
           <div class="column-flex-container">
             <lable for="username" class="hidden">username</lable>
             <input id="username" type="text" name="username" placeholder="Enter username" required>
-            <span class="message hidden">Invalid username</span>
+            <span id="invalid-username-text" class="message hidden">Invalid username</span>
           </div>
           <div class="column-flex-container">
             <lable for="password" class="hidden">password</lable>
             <input id="password" name="password" type="password" placeholder="Password" required>
-            <span class="message hidden">Invalid password</span>
+            <span id="invalid-password-text" class="message hidden">Invalid password</span>
           </div>
           <button id='login-button' type="submit">Submit</button>
         </div>
@@ -40,8 +40,11 @@
   </section>
   <main>
     <div class="view customer-dashboard-view grid-container hidden">
-      <aside class="grid-item sidebar">my profile</aside>
-      <article class="grid-item book-room">booke a new room</article>
+      <aside class="grid-item sidebar">
+        <p>my profile</p>
+        <p class="log-out-button">Log Out</p>
+      </aside>
+      <article class="grid-item book-room">book a new room</article>
       <div class="flex-container">
         <article class="flex-item my-booking">my bookings</article>
         <article class="flex-item spending">total spending on rooms</article>

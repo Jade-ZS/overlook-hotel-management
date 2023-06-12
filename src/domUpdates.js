@@ -5,9 +5,17 @@ import {
   myBookingsView,
   makeBookingView,
   roomDetailView,
+  homeSidebar,
   usernameInput,
   passwordInput,
-} from './scripts'
+  invalidPasswordText,
+  invalidUserText,
+} from './scripts';
+
+import { 
+  checkPassword,
+  checkUser,
+ } from './log-in';
 
 const changeView = (views, action, classToToggle) => {
   views.forEach(view => view.classList[action](classToToggle));
@@ -21,15 +29,54 @@ const renderRoleChoice = () => {
 
 };
 
-const renderLogIn = () => {
+const renderLoginCheck = (userData) => {
+  let isValid = false;
+  let isValidName = checkUser(usernameInput.value, userData);
+  let isValidPassword = checkPassword(passwordInput.value, 'overlook2021');
+  invalidUserText.innerText = '';
+  invalidPasswordText.innerText = '';
 
+  if (!isValidName) {
+    invalidUserText.innerText = 'Invalid username';
+    changeView([invalidUserText], 'remove', 'hidden');
+  } 
+  
+  if (!isValidPassword) {
+    invalidPasswordText.innerText = 'Invalid password';
+    changeView([invalidPasswordText], 'remove', 'hidden');
+  }
+
+  if (!usernameInput.value.length) {
+    changeView([invalidUserText], 'remove', 'hidden');
+    invalidUserText.innerText = 'username can\'t be empty';
+  } 
+  
+  if (!passwordInput.value.length) {
+    changeView([invalidPasswordText], 'remove', 'hidden');
+    invalidPasswordText.innerText = 'password can\'t be empty';
+  }
+
+  if (isValidName && isValidName) {
+    isValid = true;
+  }
+
+  return isValid;
 };
 
+// customer dashboard
 const renderCustomerDashboard = () => {
 
-  
 };
 
+const renderHomeSidebard = (user) => {
+  homeSidebar.innerHTML = `
+    <h1>${user.name}</h1>
+    <p>username: customer${user.id}</p>
+  `;
+}
+
+
+// 
 const renderMyBookings = () => {
 
 };
@@ -93,5 +140,6 @@ export {
   displayCustomerDashboard,
   displayMyBookings,
   displayMakeBookings,
-  displayRoomDetail
+  displayRoomDetail,
+  renderLoginCheck,
 };
