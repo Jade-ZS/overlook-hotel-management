@@ -4,20 +4,18 @@ import {
   getDataByFetch, 
   addNewBooking, 
   deleteSingleBooking } from './api-calls';
-import { 
+
+
+import {
   clearView, 
   changeView,
-
-} from './domUpdates';
-
-// import {
-//   displayRoleChoice,
-//   displayLogIn,
-//   displayCustomerDashboard,
-//   displayMyBookings,
-//   displayMakeBookings,
-//   displayRoomDetail
-// } from './display-customer-views'
+  displayRoleChoice,
+  displayLogIn,
+  displayCustomerDashboard,
+  displayMyBookings,
+  displayMakeBookings,
+  displayRoomDetail
+} from './domUpdates'
 
 // customer views
 const roleChoiceView = document.querySelector('.role-choice-view');
@@ -45,49 +43,15 @@ const passwordInput = document.querySelector('#password');
 // event listeners
 customerButton.addEventListener('click', displayLogIn());
 
-// event handlers
 
-const displayRoleChoice = () => {
-  const itemsToHide = [loginView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
-  const itemsToShow = [roleChoiceView];
-  changeView(itemsToHide, 'add', 'hidden');
-  changeView(itemsToShow, 'remove', 'hidden');
+
+export {
+  roleChoiceView,
+  loginView,
+  customerDashboard,
+  myBookingsView,
+  makeBookingView,
+  roomDetailView,
+  usernameInput,
+  passwordInput,
 };
-
-const displayLogIn = () => {
-  const itemsToHide = [roleChoiceView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
-  const itemsToShow = [loginView];
-  changeView(itemsToHide, 'add', 'hidden');
-  changeView(itemsToShow, 'remove', 'hidden');
-};
-
-const displayCustomerDashboard = () => {
-  const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView, roomDetailView];
-  const itemsToShow = [customerDashboard];
-  changeView(itemsToHide, 'add', 'hidden');
-  changeView(itemsToShow, 'remove', 'hidden');
-  
-};
-
-const displayMyBookings = () => {
-  const itemsToHide = [roleChoiceView, loginView, customerDashboard, makeBookingView, roomDetailView];
-  const itemsToShow = [myBookingsView];
-  changeView(itemsToHide, 'add', 'hidden');
-  changeView(itemsToShow, 'remove', 'hidden');
-};
-
-const displayMakeBookings = () => {
-  const itemsToHide = [roleChoiceView, loginView, myBookingsView, customerDashboard, roomDetailView];
-  const itemsToShow = [makeBookingView];
-  changeView(itemsToHide, 'add', 'hidden');
-  changeView(itemsToShow, 'remove', 'hidden');
-};
-
-const displayRoomDetail = () => {
-  const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView, customerDashboard];
-  const itemsToShow = [roomDetailView];
-  changeView(itemsToHide, 'add', 'hidden');
-  changeView(itemsToShow, 'remove', 'hidden');
-};
-
-

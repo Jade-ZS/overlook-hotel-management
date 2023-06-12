@@ -57,6 +57,20 @@ body {
   align-items: center;
 }
 
+#back-to-roles {
+  text-align: right;
+  width: 19rem;
+  opacity: 50%;
+  cursor: pointer;
+}
+
+#back-to-roles:hover {
+  text-decoration: underline;
+  color: #39603D;
+  font-weight: bold;
+  opacity: 1;
+}
+
 .card {
   background: #A3BCB6;
   opacity: 0.6;

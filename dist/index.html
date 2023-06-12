@@ -19,21 +19,23 @@
       </div>
     </div>
     <div class="view column-view login-view hidden">
-      <p id="back-to-roles">Back</p>
       <h1>Log In</h1>
-      <div class="card">
-        <div class="column-flex-container">
-          <lable for="username" class="hidden">username</lable>
-          <input id="username" type="text" placeholder="Enter username">
-          <span class="message hidden">Invalid username</span>
+      <form>
+        <div class="card">
+          <div class="column-flex-container">
+            <lable for="username" class="hidden">username</lable>
+            <input id="username" type="text" name="username" placeholder="Enter username" required>
+            <span class="message hidden">Invalid username</span>
+          </div>
+          <div class="column-flex-container">
+            <lable for="password" class="hidden">password</lable>
+            <input id="password" name="password" type="password" placeholder="Password" required>
+            <span class="message hidden">Invalid password</span>
+          </div>
+          <button id='login-button' type="submit">Submit</button>
         </div>
-        <div class="column-flex-container">
-          <lable for="password" class="hidden">password</lable>
-          <input id="password" type="password" placeholder="Password">
-          <span class="message hidden">Invalid password</span>
-        </div>
-        <button id='login-button' type="submit">Submit</button>
-      </div>
+      </form>
+      <p id="back-to-roles">>>> Back to the last page</p>
     </div>
   </section>
   <main>
