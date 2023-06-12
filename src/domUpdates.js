@@ -5,7 +5,7 @@ import {
   myBookingsView,
   makeBookingView,
   roomDetailView,
-  homeSidebar,
+  sidebar,
   usernameInput,
   passwordInput,
   invalidPasswordText,
@@ -80,10 +80,10 @@ const renderHomeSidebard = (user) => {
 // my bookings
 const renderMyBookings = (booking) => {
   myTripsBox.innerHTML += `
-      <tr> 
-        <td>${booking.date}</th>
-        <td>${booking.id}</th>
-      <tr>
+      <p> 
+        <span>${booking.date}</span>
+        <span>${booking.id}</span>
+      </p>
   `;
 };
 
@@ -100,14 +100,14 @@ const renderRoomDetail = () => {
 
  // displays
  const displayRoleChoice = () => {
-  const itemsToHide = [loginView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
+  const itemsToHide = [sidebar, loginView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
   const itemsToShow = [roleChoiceView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 };
 
 const displayLogIn = () => {
-  const itemsToHide = [roleChoiceView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
+  const itemsToHide = [sidebar, roleChoiceView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
   const itemsToShow = [loginView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
@@ -115,7 +115,7 @@ const displayLogIn = () => {
 
 const displayCustomerDashboard = () => {
   const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView, roomDetailView];
-  const itemsToShow = [customerDashboard];
+  const itemsToShow = [sidebar, customerDashboard];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
   
@@ -123,26 +123,26 @@ const displayCustomerDashboard = () => {
 
 const displayMyBookings = (bookings, currentUser) => {
   const itemsToHide = [roleChoiceView, loginView, customerDashboard, makeBookingView, roomDetailView];
-  const itemsToShow = [myBookingsView];
+  const itemsToShow = [sidebar, myBookingsView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 
   const myBookings = bookings.filter(booking => booking.userID === currentUser.id);
-  console.log('myBookings: ', myBookings)
 
+  clearView([myTripsBox]);
   myBookings.forEach(booking => renderMyBookings(booking));
 };
 
 const displayMakeBookings = () => {
   const itemsToHide = [roleChoiceView, loginView, myBookingsView, customerDashboard, roomDetailView];
-  const itemsToShow = [makeBookingView];
+  const itemsToShow = [sidebar, makeBookingView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 };
 
 const displayRoomDetail = () => {
   const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView, customerDashboard];
-  const itemsToShow = [roomDetailView];
+  const itemsToShow = [sidebar, roomDetailView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 };

@@ -38,32 +38,33 @@
       <p id="back-to-roles">>>> Back to the last page</p>
     </div>
   </section>
-  <main>
+  <main class="view">
+    <aside class="grid-item sidebar column-flex-container hidden">
+      <p>my profile</p>
+      <button id="home-button">Home</button>
+      <button id="my-bookings-view-button">My Bookings</button>
+      <button id="book-a-room-view-button">Book A Room</button>
+      <button id="log-out-button">Log Out</button>
+    </aside>
     <div class="view customer-dashboard-view grid-container hidden">
-      <aside class="grid-item sidebar">
-        <p>my profile</p>
-        <p class="log-out-button">Log Out</p>
-      </aside>
       <article class="grid-item book-room">book a new room</article>
-      <div class="flex-container">
-        <article class="flex-item my-booking">my bookings</article>
-        <article class="flex-item spending">total spending on rooms</article>
-      </div>
+    
+      <article class="flex-item my-booking">my bookings</article>
+      <article class="flex-item spending">total spending on rooms</article>
+
     </div>
-    <div class="view my-bookings-view grid-container hidden">
-      <aside class="grid-item sidebar">my profile</aside>
-      <article class="grid-item header">My Bookings</article>
-      <article class="flex-item">
-        <h1> My Trips </h1>
+    <div class="view my-bookings-view column-flex-container hidden">
+      <article class="flex-item header">My Bookings</article>
+      <article class="flex-item column-flex-container my-booking-info-box">
         <div>
           <span>Date</span>
           <span>Order Number</span>
         </div>
-        <div class="my-booking-details"></div>
+        <div class="my-booking-details column-flex-container">
+          <!-- my bookings will be displayed here -->
+        </div>
       </article>
 
-
-      <!-- my bookings will be displayed here -->
     </div>
     <div class="view book-a-room-view hidden">
       <!-- my bookings will be displayed here -->

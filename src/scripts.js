@@ -32,10 +32,14 @@ const customerButton = document.querySelector('#customer-button');
 const managerButton = document.querySelector('#manager-button');
 const backToRolesButton = document.querySelector('#back-to-roles');
 const loginButton = document.querySelector('#login-button');
-const logoutButton = document.querySelector('.log-out-button');
+const logoutButton = document.querySelector('#log-out-button');
+const homeButton = document.querySelector('#home-button');
+const myBookingsViewButton = document.querySelector('#my-bookings-view-button');
+const makeBookingViewButton = document.querySelector('#book-a-room-view-button');
+
 
 // boxes
-const homeSidebar = document.querySelector('.customer-dashboard-view .sidebar');
+const sidebar = document.querySelector('.sidebar');
 const toMakeBookingBox = document.querySelector('.book-room');
 const toMyBookingsBox = document.querySelector('.my-booking');
 const toSpendingBox = document.querySelector('.spending');
@@ -96,6 +100,17 @@ toMakeBookingBox.addEventListener('click', e => {
   displayMakeBookings();
 });
 
+homeButton.addEventListener('click', e => {
+  displayCustomerDashboard();
+});
+
+myBookingsViewButton.addEventListener('click', e => {
+  displayMyBookings(bookingsData, currentUser);
+});
+
+makeBookingViewButton.addEventListener('click', e => {
+  displayMakeBookings();
+});
 
 
 
@@ -109,10 +124,13 @@ export {
   myBookingsView,
   makeBookingView,
   roomDetailView,
-  homeSidebar,
+  sidebar,
   usernameInput,
   passwordInput,
   invalidPasswordText,
   invalidUserText,
   myTripsBox,
+  homeButton,
+  myBookingsViewButton,
+  makeBookingViewButton,
 };
