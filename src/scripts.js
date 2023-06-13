@@ -2,8 +2,8 @@ import './css/styles.css';
 import './images/turing-logo.png';
 import { 
   getDataByFetch, 
-  addNewBooking, 
-  deleteSingleBooking } from './api-calls';
+  addNewBooking
+} from './api-calls';
 
 import {
   getTotalSpending
@@ -11,19 +11,14 @@ import {
 
 import {
   getChosenDate,
-  getAvailableRooms,
-  clearView, 
-  changeView,
   displayRoleChoice,
   displayLogIn,
   displayCustomerDashboard,
   displayMyBookings,
   displayMakeBookings,
-  displayRoomDetail,
   displaySearchResult,
   renderLoginCheck,
-  renderUserInfo,
-
+  renderUserInfo
 } from './domUpdates'
 
 // customer views
@@ -36,7 +31,6 @@ const roomDetailView = document.querySelector('.room-detail-view');
 
 // buttons
 const customerButton = document.querySelector('#customer-button');
-const managerButton = document.querySelector('#manager-button');
 const backToRolesButton = document.querySelector('#back-to-roles');
 const loginButton = document.querySelector('#login-button');
 const logoutButton = document.querySelector('#log-out-button');
@@ -50,7 +44,6 @@ const toMakeBookingBox = document.querySelector('.book-room');
 const toMyBookingsBox = document.querySelector('.my-booking');
 const spendingBox = document.querySelector('.spending');
 const userInfo = document.querySelector('.user-info');
-// const myTripsBox = document.querySelector('.my-booking-details');
 
 // form
 const loginForm = document.querySelector('.login-view form');
@@ -65,7 +58,6 @@ let bookingsData;
 let currentUser;
 let spending;
 
-
 const start = () => {
   Promise.all([getDataByFetch('customers'), getDataByFetch('rooms'), getDataByFetch('bookings')])
   .then((data) => {
@@ -79,19 +71,15 @@ const start = () => {
 
 // event listeners
 window.addEventListener('load', start);
-
 customerButton.addEventListener('click', e => {
   displayLogIn();
 });
-
 backToRolesButton.addEventListener('click', e => {
   displayRoleChoice();
 });
-
 logoutButton.addEventListener('click', e => {
   displayRoleChoice();
 });
-
 loginButton.addEventListener('click', e => {
   e.preventDefault();
   if (loginForm.checkValidity() && renderLoginCheck(userData)) {
@@ -102,33 +90,26 @@ loginButton.addEventListener('click', e => {
   spending = getTotalSpending(bookingsData, roomsData);
   renderUserInfo(currentUser);
 });
-
 toMyBookingsBox.addEventListener('click', e => {
   displayMyBookings(bookingsData, roomsData, currentUser);
 });
-
 toMakeBookingBox.addEventListener('click', e => {
   displayMakeBookings(e, bookingsData, roomsData);
 });
-
 homeButton.addEventListener('click', e => {
   displayCustomerDashboard(spending);
 });
-
 myBookingsViewButton.addEventListener('click', e => {
   displayMyBookings(bookingsData, roomsData, currentUser);
 });
-
 makeBookingViewButton.addEventListener('click', e => {
   displayMakeBookings(e, bookingsData, roomsData);
 });
-
 makeBookingView.addEventListener('click', e => {
   if (e.target.id === "search-rooms-button") {
     e.preventDefault();
     displaySearchResult(bookingsData, roomsData);
   }
-
   if (e.target.classList.contains('book-this-room-button')) {
     e.preventDefault();
     let date = getChosenDate();
@@ -147,15 +128,8 @@ makeBookingView.addEventListener('click', e => {
       start();
       setTimeout(() => alert('You\'ve successfully booked this room!'), 1000);
     }
-
   }
 });
-
-
-
-
-
-
 
 export {
   roleChoiceView,
@@ -169,10 +143,9 @@ export {
   passwordInput,
   invalidPasswordText,
   invalidUserText,
-  // myTripsBox,
   homeButton,
   myBookingsViewButton,
   makeBookingViewButton,
   spendingBox,
-  userInfo,
+  userInfo
 };
