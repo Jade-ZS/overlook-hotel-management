@@ -22,6 +22,7 @@ import {
   displayRoomDetail,
   displaySearchResult,
   renderLoginCheck,
+  renderUserInfo,
 
 } from './domUpdates'
 
@@ -43,12 +44,12 @@ const homeButton = document.querySelector('#home-button');
 const myBookingsViewButton = document.querySelector('#my-bookings-view-button');
 const makeBookingViewButton = document.querySelector('#book-a-room-view-button');
 
-
 // boxes
 const sidebar = document.querySelector('.sidebar');
 const toMakeBookingBox = document.querySelector('.book-room');
 const toMyBookingsBox = document.querySelector('.my-booking');
 const spendingBox = document.querySelector('.spending');
+const userInfo = document.querySelector('.user-info');
 // const myTripsBox = document.querySelector('.my-booking-details');
 
 // form
@@ -71,6 +72,8 @@ const start = () => {
     userData = data[0].customers;
     roomsData = data[1].rooms;
     bookingsData = data[2].bookings;
+
+    spending = getTotalSpending(bookingsData, roomsData);
   });
 };
 
@@ -97,6 +100,7 @@ loginButton.addEventListener('click', e => {
   } 
   renderLoginCheck(userData);
   spending = getTotalSpending(bookingsData, roomsData);
+  renderUserInfo(currentUser);
 });
 
 toMyBookingsBox.addEventListener('click', e => {
@@ -170,4 +174,5 @@ export {
   myBookingsViewButton,
   makeBookingViewButton,
   spendingBox,
+  userInfo,
 };

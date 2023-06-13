@@ -11,6 +11,7 @@ import {
   invalidPasswordText,
   invalidUserText,
   spendingBox,
+  userInfo,
   // myTripsBox,
 } from './scripts';
 
@@ -78,13 +79,12 @@ const renderSpendingBox = (spending) => {
   spendingBox.innerHTML = `Total Spending: $${spending}`;
 };
 
-const renderHomeSidebard = (user) => {
-  homeSidebar.innerHTML = `
+const renderUserInfo = (user) => {
+  userInfo.innerHTML = `
     <h1>${user.name}</h1>
     <p>username: customer${user.id}</p>
   `;
 }
-
 
 // my bookings
 const checkBidet = room => {
@@ -222,13 +222,6 @@ const renderMakeBookings = (rooms) => {
   `;
 };
 
-
-
-const renderRoomDetail = () => {
- 
-
-};
-
  // displays
  const displayRoleChoice = () => {
   const itemsToHide = [sidebar, loginView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
@@ -330,4 +323,5 @@ export {
   displayRoomDetail,
   displaySearchResult,
   renderLoginCheck,
+  renderUserInfo,
 };
