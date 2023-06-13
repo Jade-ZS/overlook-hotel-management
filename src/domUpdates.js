@@ -11,16 +11,12 @@ import {
   invalidPasswordText,
   invalidUserText,
   spendingBox,
-  userInfo,
-  // myTripsBox,
+  userInfo
 } from './scripts';
-
-
 
 import {
   getRoomByDate,
   getRoomByType,
-
 } from './customer-get-room';
 
 import {
@@ -51,30 +47,24 @@ const renderLoginCheck = (userData) => {
     invalidUserText.innerText = 'Invalid username';
     changeView([invalidUserText], 'remove', 'hidden');
   } 
-  
   if (!isValidPassword) {
     invalidPasswordText.innerText = 'Invalid password';
     changeView([invalidPasswordText], 'remove', 'hidden');
   }
-
   if (!usernameInput.value.length) {
     changeView([invalidUserText], 'remove', 'hidden');
     invalidUserText.innerText = 'username can\'t be empty';
   } 
-  
   if (!passwordInput.value.length) {
     changeView([invalidPasswordText], 'remove', 'hidden');
     invalidPasswordText.innerText = 'password can\'t be empty';
   }
-
   if (isValidName && isValidName) {
     isValid = true;
   }
-
   return isValid;
 };
 
-// customer dashboard
 const renderSpendingBox = (spending) => {
   spendingBox.innerHTML = `Total Spending: $${spending}`;
 };
@@ -86,7 +76,6 @@ const renderUserInfo = (user) => {
   `;
 }
 
-// my bookings
 const checkBidet = room => {
   if (room.bidet) {
     return 'with bidet';
@@ -138,8 +127,6 @@ const renderMyBookings = (bookings, rooms, currentUser) => {
   `;
 };
 
-
-// make bookings view
 const renderSearchBox = () => {
   const searchBox = `
     <form action="">
@@ -160,7 +147,6 @@ const renderSearchBox = () => {
   `;
   return searchBox;
 };
-
 
 const renderSingleRoomItem = (room) => {
   const singleRoom = `
@@ -211,7 +197,6 @@ const renderResultBox = (rooms) => {
       </div>
     `;
 }
-
  return resultBox;
 };
 
@@ -222,7 +207,29 @@ const renderMakeBookings = (rooms) => {
   `;
 };
 
- // displays
+const getChosenDate = () => {
+  const dateInput = document.querySelector('#date');
+  if (!dateInput.value.length) {
+    alert('date input can not be empty!');
+    return 
+  }
+  return dateInput.value.split('-').join('/');
+};
+
+const getAvailableRooms = (bookings, rooms) => {
+  const date = getChosenDate();
+  if (!date) {
+    return; 
+  }
+
+  let availableRooms = getRoomByDate(date, bookings, rooms);
+  const roomTypeInput = document.querySelector('#room-type');
+  if (roomTypeInput.value !== 'all') {
+    availableRooms = getRoomByType(roomTypeInput.value, availableRooms);
+  }
+  return availableRooms;
+};
+
  const displayRoleChoice = () => {
   const itemsToHide = [sidebar, loginView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
   const itemsToShow = [roleChoiceView];
@@ -242,7 +249,6 @@ const displayCustomerDashboard = (spending) => {
   const itemsToShow = [sidebar, customerDashboard];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
-  
   renderSpendingBox(spending);
 };
 
@@ -251,46 +257,17 @@ const displayMyBookings = (bookings, rooms, currentUser) => {
   const itemsToShow = [sidebar, myBookingsView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
-
   clearView([myBookingsView]);
   renderMyBookings(bookings, rooms, currentUser);
 };
-
-const getChosenDate = () => {
-  const dateInput = document.querySelector('#date');
-  if (!dateInput.value.length) {
-    alert('date input can not be empty!');
-    return 
-  }
-  return dateInput.value.split('-').join('/');
-};
-
-const getAvailableRooms = (bookings, rooms) => {
-  const date = getChosenDate();
-  if (!date) {
-    return; 
-  }
-  
-  let availableRooms = getRoomByDate(date, bookings, rooms);
-  
-  const roomTypeInput = document.querySelector('#room-type');
-  if (roomTypeInput.value !== 'all') {
-    availableRooms = getRoomByType(roomTypeInput.value, availableRooms);
-  }
-
-  return availableRooms;
-}
 
 const displayMakeBookings = (e, bookings, rooms) => {
   const itemsToHide = [roleChoiceView, loginView, myBookingsView, customerDashboard, roomDetailView];
   const itemsToShow = [sidebar, makeBookingView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
-
   clearView([makeBookingView]);
-
   renderMakeBookings(rooms);
-  
 };
 
 const displayRoomDetail = () => {
@@ -298,8 +275,6 @@ const displayRoomDetail = () => {
   const itemsToShow = [sidebar, roomDetailView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
-
-  
 };
 
 const displaySearchResult = (bookings, rooms) => {
@@ -308,9 +283,6 @@ const displaySearchResult = (bookings, rooms) => {
   const searchResultBox = document.querySelector('.available-rooms-box');
   searchResultBox.innerHTML = renderResultBox(availableRooms);
 };
-
-
-
 
 export {
   getChosenDate,
@@ -323,5 +295,5 @@ export {
   displayRoomDetail,
   displaySearchResult,
   renderLoginCheck,
-  renderUserInfo,
+  renderUserInfo
 };
