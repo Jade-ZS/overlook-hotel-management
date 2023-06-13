@@ -4,7 +4,6 @@ import {
   customerDashboard,
   myBookingsView,
   makeBookingView,
-  roomDetailView,
   sidebar,
   usernameInput,
   passwordInput,
@@ -12,10 +11,7 @@ import {
   invalidUserText,
   spendingBox,
   userInfo,
-  // myTripsBox,
 } from './scripts';
-
-
 
 import {
   getRoomByDate,
@@ -224,21 +220,21 @@ const renderMakeBookings = (rooms) => {
 
  // displays
  const displayRoleChoice = () => {
-  const itemsToHide = [sidebar, loginView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
+  const itemsToHide = [sidebar, loginView, customerDashboard, myBookingsView, makeBookingView];
   const itemsToShow = [roleChoiceView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 };
 
 const displayLogIn = () => {
-  const itemsToHide = [sidebar, roleChoiceView, customerDashboard, myBookingsView, makeBookingView, roomDetailView];
+  const itemsToHide = [sidebar, roleChoiceView, customerDashboard, myBookingsView, makeBookingView];
   const itemsToShow = [loginView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 };
 
 const displayCustomerDashboard = (spending) => {
-  const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView, roomDetailView];
+  const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView];
   const itemsToShow = [sidebar, customerDashboard];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
@@ -247,7 +243,7 @@ const displayCustomerDashboard = (spending) => {
 };
 
 const displayMyBookings = (bookings, rooms, currentUser) => {
-  const itemsToHide = [roleChoiceView, loginView, customerDashboard, makeBookingView, roomDetailView];
+  const itemsToHide = [roleChoiceView, loginView, customerDashboard, makeBookingView];
   const itemsToShow = [sidebar, myBookingsView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
@@ -282,7 +278,7 @@ const getAvailableRooms = (bookings, rooms) => {
 }
 
 const displayMakeBookings = (e, bookings, rooms) => {
-  const itemsToHide = [roleChoiceView, loginView, myBookingsView, customerDashboard, roomDetailView];
+  const itemsToHide = [roleChoiceView, loginView, myBookingsView, customerDashboard];
   const itemsToShow = [sidebar, makeBookingView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
@@ -295,7 +291,7 @@ const displayMakeBookings = (e, bookings, rooms) => {
 
 const displayRoomDetail = () => {
   const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView, customerDashboard];
-  const itemsToShow = [sidebar, roomDetailView];
+  const itemsToShow = [sidebar];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 

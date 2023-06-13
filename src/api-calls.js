@@ -1,6 +1,3 @@
-// TODO: check if delete and add works
-
-//TODO: change alert message so that it's more user readable
 const errorHandling = (response) => {
   let statusType = new String(response.status)[0];
   if (statusType === '4') {
@@ -23,17 +20,6 @@ const getDataByFetch = (path) => {
 };
 
 const addNewBooking = (data) => {
-  // console.log(JSON.stringify(booking))
-  // return fetch('http://localhost:3001/api/v1/bookings', {
-  //   method: 'POST',
-  //   body: JSON.stringify(booking),
-  //   header: {
-  //     'Content-Type' : 'application/json' 
-  //   }
-  // })
-  // .then(response => console.log(response.json()))
-  // .catch(err => alert(err));
-
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
     body: JSON.stringify(data),
@@ -45,7 +31,6 @@ const addNewBooking = (data) => {
   .then(data => console.log(data))
 };
 
-// NOTE: argument id should be a string
 const deleteSingleBooking = (id) => {
   return fetch('http://localhost:3001/api/v1/bookings/' + id, {
     method: 'DELETE',
