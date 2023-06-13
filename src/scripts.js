@@ -5,6 +5,9 @@ import {
   addNewBooking, 
   deleteSingleBooking } from './api-calls';
 
+import {
+  getTotalSpending
+} from './customer-dashboard';
 
 import {
   getChosenDate,
@@ -45,7 +48,7 @@ const makeBookingViewButton = document.querySelector('#book-a-room-view-button')
 const sidebar = document.querySelector('.sidebar');
 const toMakeBookingBox = document.querySelector('.book-room');
 const toMyBookingsBox = document.querySelector('.my-booking');
-const toSpendingBox = document.querySelector('.spending');
+const spendingBox = document.querySelector('.spending');
 // const myTripsBox = document.querySelector('.my-booking-details');
 
 // form
@@ -59,6 +62,7 @@ let userData;
 let roomsData;
 let bookingsData;
 let currentUser;
+let spending;
 
 
 const start = () => {
@@ -67,9 +71,6 @@ const start = () => {
     userData = data[0].customers;
     roomsData = data[1].rooms;
     bookingsData = data[2].bookings;
-   
-    
-    // renderRecipeCards(mainViewCardContainer, recipeData, currentUser);
   });
 };
 
@@ -91,10 +92,11 @@ logoutButton.addEventListener('click', e => {
 loginButton.addEventListener('click', e => {
   e.preventDefault();
   if (loginForm.checkValidity() && renderLoginCheck(userData)) {
-    displayCustomerDashboard();
+    displayCustomerDashboard(spending);
     currentUser = userData.find(user => user.id === parseInt(usernameInput.value.substring(8)));
   } 
   renderLoginCheck(userData);
+  spending = getTotalSpending(bookingsData, roomsData);
 });
 
 toMyBookingsBox.addEventListener('click', e => {
@@ -106,7 +108,7 @@ toMakeBookingBox.addEventListener('click', e => {
 });
 
 homeButton.addEventListener('click', e => {
-  displayCustomerDashboard();
+  displayCustomerDashboard(spending);
 });
 
 myBookingsViewButton.addEventListener('click', e => {
@@ -136,6 +138,7 @@ makeBookingView.addEventListener('click', e => {
     
     if (date && date.length) {
       addNewBooking(bookingToAdd);
+      spending += parseInt(roomsData.find(room => room.number === roomNumber).costPerNight);
       e.target.disabled = true;
       start();
       setTimeout(() => alert('You\'ve successfully booked this room!'), 1000);
@@ -166,4 +169,5 @@ export {
   homeButton,
   myBookingsViewButton,
   makeBookingViewButton,
+  spendingBox,
 };

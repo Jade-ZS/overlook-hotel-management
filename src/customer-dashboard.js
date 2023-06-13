@@ -12,6 +12,7 @@ const getMyBookings = (userID, bookings) => {
 const getTotalSpending = (bookings, rooms) => {
   return bookings.reduce((totalCost, currentBooking) => {
     let cost = matchItem(currentBooking.roomNumber, 'number', rooms).costPerNight;
+    cost = parseInt(cost);
     totalCost += cost;
     return totalCost;
   }, 0);

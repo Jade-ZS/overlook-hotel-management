@@ -138,7 +138,8 @@ aside,
   align-items: center;
 }
 
-.customer-dashboard-view article:hover {
+article.my-booking:hover,
+article.book-room:hover {
   background: #A3BCB6;
 }
 

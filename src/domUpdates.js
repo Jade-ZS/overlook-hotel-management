@@ -10,8 +10,11 @@ import {
   passwordInput,
   invalidPasswordText,
   invalidUserText,
+  spendingBox,
   // myTripsBox,
 } from './scripts';
+
+
 
 import {
   getRoomByDate,
@@ -71,8 +74,8 @@ const renderLoginCheck = (userData) => {
 };
 
 // customer dashboard
-const renderCustomerDashboard = () => {
-
+const renderSpendingBox = (spending) => {
+  spendingBox.innerHTML = `Total Spending: $${spending}`;
 };
 
 const renderHomeSidebard = (user) => {
@@ -241,12 +244,13 @@ const displayLogIn = () => {
   changeView(itemsToShow, 'remove', 'hidden');
 };
 
-const displayCustomerDashboard = () => {
+const displayCustomerDashboard = (spending) => {
   const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView, roomDetailView];
   const itemsToShow = [sidebar, customerDashboard];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
   
+  renderSpendingBox(spending);
 };
 
 const displayMyBookings = (bookings, rooms, currentUser) => {
