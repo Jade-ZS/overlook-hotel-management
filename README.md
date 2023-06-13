@@ -12,6 +12,12 @@ As a Mod 2 student in the Turing front end program, the learning goals for this 
 - Implement a robust testing suite using TDD
 - Write DRY, reusable code that follows SRP (Single Responsibility Principle)
 
+## Technology Used
+- JavaScript, HTML, CSS
+- Fetch API to retrieve and add data
+- Mocha and Chai for testing your code
+- Webpack
+
 ## Contributor
 <p><a href="https://github.com/Jade-ZS">Jade Shi</a>
   
