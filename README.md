@@ -32,4 +32,11 @@ As a Mod 2 student in the Turing front end program, the learning goals for this 
    - Run the command `cd overlook-hotel-management` to get inside the folder, and then run `npm install` to install dependancies.
    - In the terminal, run the commant `npm start` to start the application and go to the browser and type "localhost:8080" to view the application. 
     - to exit the application, enter the command: control + c to stop the server!
-3. TESTING: to check testing, run the command `npm test` in the terminal.
+  
+3. Use the following info to log in :
+  ```
+   username: customer50 
+   password: overlook2021
+  ```
+  
+4. TESTING: to check testing, run the command `npm test` in the terminal.
