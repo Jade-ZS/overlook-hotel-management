@@ -11,6 +11,14 @@ body {
   height: 100vh;
 }
 
+main {
+  gap: 20pt;
+}
+
+aside {
+  width: 15rem;
+}
+
 /* text */
 .center-text {
   text-align: center;
@@ -27,7 +35,12 @@ body {
 .column-view,
 .column-flex-container,
 .card {
+  display: flex;
   flex-direction: column;
+}
+
+main.view {
+  justify-content: flex-start;
 }
 
 /* role choice view */
@@ -82,9 +95,9 @@ body {
   gap: 10pt;
 } 
 
-.column-flex-container {
+/* .column-flex-container {
   width: 15rem;
-}
+} */
 
 .login-view input {
   width: 15rem;
@@ -98,11 +111,11 @@ body {
 .grid-container {
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: 20vw 70vw;
+  grid-template-columns: 40vw 40vw;
   grid-template-rows: 45vh 45vh;
 }
 
-.customer-dashboard-view .flex-container {
+.customer-dashboard-view {
   width: 70vw;
   justify-content: space-between;
 }
@@ -111,8 +124,8 @@ body {
   width: 34vw;
 }
 
-.sidebar {
-  grid-row: 1/3;
+.grid-item.book-room {
+  grid-column: 1/3;
 }
 
 aside,
@@ -125,20 +138,112 @@ aside,
   align-items: center;
 }
 
-.customer-dashboard-view article:hover {
+article.my-booking:hover,
+article.book-room:hover {
   background: #A3BCB6;
 }
 
 /* my bookings */
-.my-bookings-view.grid-container {
+/* .my-bookings-view.grid-container {
   grid-template-rows: 10vh 90vh;
-}
+} */
 
-.my-bookings-view .sidebar {
+/* .my-bookings-view .sidebar {
   grid-row: 1/4;
+} */
+
+/* .my-bookings-details { */
+  /* display: grid;
+  align-items: center;
+  grid-auto-flow: row;
+  grid-auto-rows: 25%; /* play with this to change height of the children, 50% will fill half */
+  /* grid-template-columns: unset; do not set template columns and rows */
+  /* grid-template-rows: unset; */
+  /* overflow: scroll; */
+
+
+  /* overflow: scroll; */
+  /* scrollbar-color: red orange; */
+  /* scrollbar-width: thin;  */
+/* } */
+
+.my-bookings-view {
+  gap: 20pt;
+  width: 80vw;
 }
 
+.header {
+  height: 20vh;
+}
 
+.my-booking-info-box {
+  height: 80vh;
+}
+
+.scroll-box {
+  width: 95%;
+  display: grid;
+  align-items: center;
+  grid-auto-flow: row;
+  grid-auto-rows: 10%; 
+  grid-template-columns: unset; 
+  grid-template-rows: unset;
+  overflow: scroll;
+  padding: 20pt;
+}
+
+/* table */
+
+/* table {
+  max-height: 100%;
+} */
+
+.tableFixHead {
+  overflow-y: auto; /* make the table scrollable if height is more than 200 px  */
+  height: 95%; /* gives an initial height of 200px to the table */
+}
+
+.tableFixHead thead th {
+  position: sticky; /* make the table heads sticky */
+  top: 0px; /* table head will be placed from the top of the table and sticks to it */
+}
+
+table {
+  border-collapse: collapse; /* make the table borders collapse to each other */
+  width: 100%;
+  border-style: hidden;
+}
+
+th,
+td {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background: #eee;
+}
+
+.book-a-room-view {
+  gap: 20pt;
+}
+
+.available-rooms-box {
+  height: 80vh;
+}
+
+.book-a-room-view .scroll-box {
+  grid-auto-rows: 30pt; 
+  height: 80vh;
+}
+
+.info-item {
+  margin-right: 100pt;
+}
+
+.booking-item {
+  row-gap: 50pt;
+}
 
 /* others */
 .hidden {

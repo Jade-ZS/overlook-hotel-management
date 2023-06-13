@@ -5,8 +5,13 @@ import {
   addNewBooking, 
   deleteSingleBooking } from './api-calls';
 
+import {
+  getTotalSpending
+} from './customer-dashboard';
 
 import {
+  getChosenDate,
+  getAvailableRooms,
   clearView, 
   changeView,
   displayRoleChoice,
@@ -15,7 +20,9 @@ import {
   displayMyBookings,
   displayMakeBookings,
   displayRoomDetail,
+  displaySearchResult,
   renderLoginCheck,
+  renderUserInfo,
 
 } from './domUpdates'
 
@@ -32,15 +39,18 @@ const customerButton = document.querySelector('#customer-button');
 const managerButton = document.querySelector('#manager-button');
 const backToRolesButton = document.querySelector('#back-to-roles');
 const loginButton = document.querySelector('#login-button');
-const logoutButton = document.querySelector('.log-out-button');
+const logoutButton = document.querySelector('#log-out-button');
+const homeButton = document.querySelector('#home-button');
+const myBookingsViewButton = document.querySelector('#my-bookings-view-button');
+const makeBookingViewButton = document.querySelector('#book-a-room-view-button');
 
 // boxes
-const homeSidebar = document.querySelector('.customer-dashboard-view .sidebar');
+const sidebar = document.querySelector('.sidebar');
 const toMakeBookingBox = document.querySelector('.book-room');
 const toMyBookingsBox = document.querySelector('.my-booking');
-const toSpendingBox = document.querySelector('.spending');
-
-const myTripsBox = document.querySelector('.my-booking-details');
+const spendingBox = document.querySelector('.spending');
+const userInfo = document.querySelector('.user-info');
+// const myTripsBox = document.querySelector('.my-booking-details');
 
 // form
 const loginForm = document.querySelector('.login-view form');
@@ -53,19 +63,23 @@ let userData;
 let roomsData;
 let bookingsData;
 let currentUser;
+let spending;
+
 
 const start = () => {
-  Promise.all([getDataByFetch('customers'), getDataByFetch('rooms'), getDataByFetch('bookings')]).then((data) => {
+  Promise.all([getDataByFetch('customers'), getDataByFetch('rooms'), getDataByFetch('bookings')])
+  .then((data) => {
     userData = data[0].customers;
     roomsData = data[1].rooms;
     bookingsData = data[2].bookings;
-   
-    // renderRecipeCards(mainViewCardContainer, recipeData, currentUser);
+
+    spending = getTotalSpending(bookingsData, roomsData);
   });
 };
 
 // event listeners
 window.addEventListener('load', start);
+
 customerButton.addEventListener('click', e => {
   displayLogIn();
 });
@@ -81,19 +95,60 @@ logoutButton.addEventListener('click', e => {
 loginButton.addEventListener('click', e => {
   e.preventDefault();
   if (loginForm.checkValidity() && renderLoginCheck(userData)) {
-    displayCustomerDashboard();
+    displayCustomerDashboard(spending);
     currentUser = userData.find(user => user.id === parseInt(usernameInput.value.substring(8)));
   } 
   renderLoginCheck(userData);
-
+  spending = getTotalSpending(bookingsData, roomsData);
+  renderUserInfo(currentUser);
 });
 
 toMyBookingsBox.addEventListener('click', e => {
-  displayMyBookings(bookingsData, currentUser);
+  displayMyBookings(bookingsData, roomsData, currentUser);
 });
 
 toMakeBookingBox.addEventListener('click', e => {
-  displayMakeBookings();
+  displayMakeBookings(e, bookingsData, roomsData);
+});
+
+homeButton.addEventListener('click', e => {
+  displayCustomerDashboard(spending);
+});
+
+myBookingsViewButton.addEventListener('click', e => {
+  displayMyBookings(bookingsData, roomsData, currentUser);
+});
+
+makeBookingViewButton.addEventListener('click', e => {
+  displayMakeBookings(e, bookingsData, roomsData);
+});
+
+makeBookingView.addEventListener('click', e => {
+  if (e.target.id === "search-rooms-button") {
+    e.preventDefault();
+    displaySearchResult(bookingsData, roomsData);
+  }
+
+  if (e.target.classList.contains('book-this-room-button')) {
+    e.preventDefault();
+    let date = getChosenDate();
+    let userID = currentUser.id;
+    let roomNumber = parseInt(e.target.id);
+    
+    let bookingToAdd = {
+      userID, 
+      date, 
+      roomNumber};
+    
+    if (date && date.length) {
+      addNewBooking(bookingToAdd);
+      spending += parseInt(roomsData.find(room => room.number === roomNumber).costPerNight);
+      e.target.disabled = true;
+      start();
+      setTimeout(() => alert('You\'ve successfully booked this room!'), 1000);
+    }
+
+  }
 });
 
 
@@ -109,10 +164,15 @@ export {
   myBookingsView,
   makeBookingView,
   roomDetailView,
-  homeSidebar,
+  sidebar,
   usernameInput,
   passwordInput,
   invalidPasswordText,
   invalidUserText,
-  myTripsBox,
+  // myTripsBox,
+  homeButton,
+  myBookingsViewButton,
+  makeBookingViewButton,
+  spendingBox,
+  userInfo,
 };
