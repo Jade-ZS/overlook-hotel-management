@@ -1,8 +1,8 @@
 # Overlook
-Overlook is a hotel management tool for hotel customers to manage room bookings and calculate customer bills.
+Overlook is a hotel management tool for hotel customers to manage room bookings and calculate customer bills. Users will be able to choose their according roles as either customer or manager. When log in as a customer, user will be able to see his room bookings (past and upcoming), view the total spending the user has made on room bookings, search and book available hotel rooms. 
 
 ## Preview
-
+![ezgif com-video-to-gif (4)](https://user-images.githubusercontent.com/123802263/245462784-bf238287-bd77-4f7b-b75f-5f07f374c77d.gif)
 
 ## Setup
 
