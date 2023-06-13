@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overlook Hotel Management Tool</title>
-  </head>
-  <body>
-    <section class="entrance-pages">
-      <div class="view column-view role-choice-view">
-        <h1 class="center-text">Overlook</h1>
-        <p class="center-text">Are you a customer or a manager?</p>
-        <div class="flex-container">
-          <button id="customer-button">customer</button>
-          <button id="manager-button">manager</button>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overlook Hotel Management Tool</title>
+</head>
+<body>
+  <section class="entrance-pages">
+    <div class="view column-view role-choice-view">
+      <h1 class="center-text">Overlook</h1>
+      <p class="center-text">Are you a customer or a manager?</p>
+      <div class="flex-container">
+        <!-- TODO: add customer icon -->
+        <button id="customer-button">customer</button>
+        <!-- TODO: add manager icon -->
+        <button id="manager-button">manager</button>
       </div>
-      <div class="view column-view login-view hidden">
-        <h1>Log In</h1>
-        <form>
-          <div class="card">
-            <div class="column-flex-container">
-              <label for="username" class="hidden">username</label>
-              <input id="username" type="text" name="username" placeholder="Enter username" required>
-              <span id="invalid-username-text" class="message hidden">Invalid username</span>
-            </div>
-            <div class="column-flex-container">
-              <label for="password" class="hidden">password</label>
-              <input id="password" name="password" type="password" placeholder="Password" required>
-              <span id="invalid-password-text" class="message hidden">Invalid password</span>
-            </div>
-            <button id='login-button' type="submit">Submit</button>
+    </div>
+    <div class="view column-view login-view hidden">
+      <h1>Log In</h1>
+      <form>
+        <div class="card">
+          <div class="column-flex-container">
+            <label for="username" class="hidden">username</label>
+            <input id="username" type="text" name="username" placeholder="Enter username" required>
+            <span id="invalid-username-text" class="message hidden">Invalid username</span>
           </div>
-        </form>
-        <p id="back-to-roles">>>> Back to the last page</p>
-      </div>
-    </section>
-    <main class="view">
-      <aside class="grid-item sidebar column-flex-container hidden">
-        <p class="user-info">my profile</p>
-        <button id="home-button">Home</button>
-        <button id="my-bookings-view-button">My Bookings</button>
-        <button id="book-a-room-view-button">Book A Room</button>
-        <button id="log-out-button">Log Out</button>
-      </aside>
-      <div class="view customer-dashboard-view grid-container hidden">
-        <article class="grid-item book-room">book a new room</article>
-        <article class="flex-item my-booking">my bookings</article>
-        <article class="flex-item spending">total spending on rooms</article>
-      </div>
-      <div class="view my-bookings-view column-flex-container hidden">
-        <!-- my bookings will be displayed here -->
-      </div>
-      <div class="view book-a-room-view column-flex-container hidden">
-        <!-- room search results will be displayed here -->
-      </div>  
-    </main>
-    <script src="bundle.js"></script>
-  </body>
+          <div class="column-flex-container">
+            <label for="password" class="hidden">password</label>
+            <input id="password" name="password" type="password" placeholder="Password" required>
+            <span id="invalid-password-text" class="message hidden">Invalid password</span>
+          </div>
+          <button id='login-button' type="submit">Submit</button>
+        </div>
+      </form>
+      <p id="back-to-roles">>>> Back to the last page</p>
+    </div>
+  </section>
+  <main class="view">
+    <aside class="grid-item sidebar column-flex-container hidden">
+      <p class="user-info">my profile</p>
+      <button id="home-button">Home</button>
+      <button id="my-bookings-view-button">My Bookings</button>
+      <button id="book-a-room-view-button">Book A Room</button>
+      <button id="log-out-button">Log Out</button>
+    </aside>
+    <div class="view customer-dashboard-view grid-container hidden">
+      <article class="grid-item book-room">book a new room</article>
+      <article class="flex-item my-booking">my bookings</article>
+      <article class="flex-item spending">total spending on rooms</article>
+
+    </div>
+    <div class="view my-bookings-view column-flex-container hidden">
+      
+
+    </div>
+    <div class="view book-a-room-view column-flex-container hidden">
+      <!-- my bookings will be displayed here -->
+    </div>
+    <div class="view room-detail-view hidden">
+      <!-- my bookings will be displayed here -->
+    </div>
+    
+  </main>
+  
+
+  
+  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <script src="bundle.js"></script>
+
+</body>
 </html>

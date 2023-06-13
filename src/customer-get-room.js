@@ -1,3 +1,5 @@
+// TO DO: matchItem is not used here, might need to remove this
+// TO DO: related test in book-room-test.js
 const matchItem = (id, key, items) => {
   if (typeof key !== 'string' || !Array.isArray(items)) {
     return 'matchItem Error: wrong input type';

@@ -118,11 +118,13 @@ describe('getRevenueForDay', function() {
   it('should return a number', function() {
     expect(typeof revenuesToTest[0]).to.equal('number');
     expect(typeof revenuesToTest[1]).to.equal('number');
+    expect(typeof revenuesToTest[2]).to.equal('number');
   });
   
   it('should return revenues based on a given day', function() {
-    expect(revenuesToTest[0]).to.equal(Math.floor(targetRevenues[0]));
-    expect(revenuesToTest[1]).to.equal(Math.floor(targetRevenues[1]));
+    expect(revenuesToTest[0]).to.equal(targetRevenues[0]);
+    expect(revenuesToTest[1]).to.equal(targetRevenues[1]);
+    expect(revenuesToTest[2]).to.equal(targetRevenues[2]);
   });
 });
 
