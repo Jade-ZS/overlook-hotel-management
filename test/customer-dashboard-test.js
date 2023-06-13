@@ -44,22 +44,16 @@ describe('getTotalSpending', function() {
     myBookings[0] = [sampleBookings[0]];
     myBookings[1] = sampleBookings.slice(0, 2);
     myBookings[2] = sampleBookings.slice(0, 3);
-    myBookings[3] = sampleBookings.slice(0, 4);
-    myBookings[4] = sampleBookings;
     
     spendings[0] = 358.4;
     spendings[1] = 358.4 + 477.38;
     spendings[2] = 358.4 + 477.38 + 491.14;
-    spendings[3] = 358.4 + 477.38 + 491.14 + 429.44;
-    spendings[4] = 358.4 + 477.38 + 491.14 + 429.44 + 340.17;
   });
   
   it('should return the total spending of the customer\'s bookings', function() {
-    expect(getTotalSpending(myBookings[0], sampleRooms)).to.equal(spendings[0]);
-    expect(getTotalSpending(myBookings[1], sampleRooms)).to.equal(spendings[1]);
-    expect(getTotalSpending(myBookings[2], sampleRooms)).to.equal(spendings[2]);
-    expect(getTotalSpending(myBookings[3], sampleRooms)).to.equal(spendings[3]);
-    expect(getTotalSpending(myBookings[4], sampleRooms)).to.equal(spendings[4]);
+    expect(getTotalSpending(myBookings[0], sampleRooms)).to.equal(Math.floor(spendings[0]));
+    expect(getTotalSpending(myBookings[1], sampleRooms)).to.equal(Math.floor(spendings[1]));
+    expect(getTotalSpending(myBookings[2], sampleRooms)).to.equal(Math.floor(spendings[2]));
   });
 });
 

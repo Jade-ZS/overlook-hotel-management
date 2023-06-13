@@ -3,7 +3,6 @@ import { sampleBookings, sampleRooms, sampleCustomers } from './sample-data';
 import { matchItem, checkDateFormat, getRoomByDate, getRoomByType } from '../src/customer-get-room'
 const expect = chai.expect;
 
-// matchItem is not used, might need to get rid of this
 describe('matchItem', function() {
   it('should be a function', () => {
     expect(matchItem).to.be.a('function');

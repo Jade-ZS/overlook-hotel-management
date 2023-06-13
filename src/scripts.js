@@ -3,7 +3,7 @@ import './images/turing-logo.png';
 import { 
   getDataByFetch, 
   addNewBooking, 
-  deleteSingleBooking } from './api-calls';
+} from './api-calls';
 
 import {
   getTotalSpending
@@ -11,15 +11,11 @@ import {
 
 import {
   getChosenDate,
-  getAvailableRooms,
-  clearView, 
-  changeView,
   displayRoleChoice,
   displayLogIn,
   displayCustomerDashboard,
   displayMyBookings,
   displayMakeBookings,
-  displayRoomDetail,
   displaySearchResult,
   renderLoginCheck,
   renderUserInfo,
@@ -32,7 +28,6 @@ const loginView = document.querySelector('.login-view');
 const customerDashboard = document.querySelector('.customer-dashboard-view');
 const myBookingsView = document.querySelector('.my-bookings-view');
 const makeBookingView = document.querySelector('.book-a-room-view');
-const roomDetailView = document.querySelector('.room-detail-view');
 
 // buttons
 const customerButton = document.querySelector('#customer-button');
@@ -50,7 +45,6 @@ const toMakeBookingBox = document.querySelector('.book-room');
 const toMyBookingsBox = document.querySelector('.my-booking');
 const spendingBox = document.querySelector('.spending');
 const userInfo = document.querySelector('.user-info');
-// const myTripsBox = document.querySelector('.my-booking-details');
 
 // form
 const loginForm = document.querySelector('.login-view form');
@@ -64,7 +58,6 @@ let roomsData;
 let bookingsData;
 let currentUser;
 let spending;
-
 
 const start = () => {
   Promise.all([getDataByFetch('customers'), getDataByFetch('rooms'), getDataByFetch('bookings')])
@@ -151,25 +144,17 @@ makeBookingView.addEventListener('click', e => {
   }
 });
 
-
-
-
-
-
-
 export {
   roleChoiceView,
   loginView,
   customerDashboard,
   myBookingsView,
   makeBookingView,
-  roomDetailView,
   sidebar,
   usernameInput,
   passwordInput,
   invalidPasswordText,
   invalidUserText,
-  // myTripsBox,
   homeButton,
   myBookingsViewButton,
   makeBookingViewButton,

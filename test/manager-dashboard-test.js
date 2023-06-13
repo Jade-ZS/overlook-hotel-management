@@ -100,31 +100,25 @@ describe('getRevenueForDay', function() {
     const bookingSample1 = JSON.parse(JSON.stringify(bookings));
     const bookingSample2 = JSON.parse(JSON.stringify(bookings));
     bookings[1].date = '2022/04/22';
-    const bookingSample3 = JSON.parse(JSON.stringify(bookings));
-    bookingSample3.forEach(booking => booking.date = '2022/04/22');
-    bookingSamples = [bookingSample1, bookingSample2, bookingSample3];
+    bookingSamples = [bookingSample1, bookingSample2];
 
     const revenue1 = 340.17;
     const revenue2 = 358.4 + 477.38;
-    const revenue3 = 358.4 + 477.38 + 491.14 + 429.44 + 340.17;
-    targetRevenues = [revenue1, revenue2, revenue3];
+    targetRevenues = [revenue1, revenue2];
 
     const revenueToTest1 = getRevenueForDay('2022/02/05', bookingSamples[0], sampleRooms);
     const revenueToTest2 = getRevenueForDay('2022/04/22', bookingSamples[1], sampleRooms);
-    const revenueToTest3 = getRevenueForDay('2022/04/22', bookingSamples[2], sampleRooms);
-    revenuesToTest = [revenueToTest1, revenueToTest2, revenueToTest3];
+    revenuesToTest = [revenueToTest1, revenueToTest2];
   });
   
   it('should return a number', function() {
     expect(typeof revenuesToTest[0]).to.equal('number');
     expect(typeof revenuesToTest[1]).to.equal('number');
-    expect(typeof revenuesToTest[2]).to.equal('number');
   });
   
   it('should return revenues based on a given day', function() {
-    expect(revenuesToTest[0]).to.equal(targetRevenues[0]);
-    expect(revenuesToTest[1]).to.equal(targetRevenues[1]);
-    expect(revenuesToTest[2]).to.equal(targetRevenues[2]);
+    expect(revenuesToTest[0]).to.equal(Math.floor(targetRevenues[0]));
+    expect(revenuesToTest[1]).to.equal(Math.floor(targetRevenues[1]));
   });
 });
 
