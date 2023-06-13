@@ -39,6 +39,10 @@ aside {
   flex-direction: column;
 }
 
+main.view {
+  justify-content: flex-start;
+}
+
 /* role choice view */
 .role-choice-view {
   justify-content: center;
@@ -175,11 +179,7 @@ aside,
   height: 80vh;
 }
 
-.my-booking-details {
-  padding: 20pt;
-}
-
-.my-booking-details {
+.scroll-box {
   width: 95%;
   display: grid;
   align-items: center;
@@ -188,12 +188,55 @@ aside,
   grid-template-columns: unset; 
   grid-template-rows: unset;
   overflow: scroll;
+  padding: 20pt;
 }
 
-.booking-record-type,
-.booking-record-cost,
-.booking-record-order-number,
-.booking-record-date {
+/* table */
+
+/* table {
+  max-height: 100%;
+} */
+
+.tableFixHead {
+  overflow-y: auto; /* make the table scrollable if height is more than 200 px  */
+  height: 95%; /* gives an initial height of 200px to the table */
+}
+
+.tableFixHead thead th {
+  position: sticky; /* make the table heads sticky */
+  top: 0px; /* table head will be placed from the top of the table and sticks to it */
+}
+
+table {
+  border-collapse: collapse; /* make the table borders collapse to each other */
+  width: 100%;
+  border-style: hidden;
+}
+
+th,
+td {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background: #eee;
+}
+
+.book-a-room-view {
+  gap: 20pt;
+}
+
+.available-rooms-box {
+  height: 80vh;
+}
+
+.book-a-room-view .scroll-box {
+  grid-auto-rows: 30pt; 
+  height: 80vh;
+}
+
+.info-item {
   margin-right: 100pt;
 }
 

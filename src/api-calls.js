@@ -12,6 +12,7 @@ const errorHandling = (response) => {
 const processResponse = (response) => {
   let isErr = errorHandling(response);
   let output = isErr ? isErr : response.json();
+  console.log('output: ', output);
   return output;
 };
 
@@ -21,16 +22,27 @@ const getDataByFetch = (path) => {
   .catch(err => alert(err));
 };
 
-const addNewBooking = (booking) => {
+const addNewBooking = (data) => {
+  // console.log(JSON.stringify(booking))
+  // return fetch('http://localhost:3001/api/v1/bookings', {
+  //   method: 'POST',
+  //   body: JSON.stringify(booking),
+  //   header: {
+  //     'Content-Type' : 'application/json' 
+  //   }
+  // })
+  // .then(response => console.log(response.json()))
+  // .catch(err => alert(err));
+
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
-    body: JSON.stringify(booking),
-    header: {
-      'Content-Type' : 'application/json' 
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
     }
   })
-  .then(response => processResponse(response))
-  .catch(err => alert(err));
+  .then(response => response.json())
+  .then(data => console.log(data))
 };
 
 // NOTE: argument id should be a string

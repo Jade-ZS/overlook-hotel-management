@@ -7,6 +7,8 @@ import {
 
 
 import {
+  getChosenDate,
+  getAvailableRooms,
   clearView, 
   changeView,
   displayRoleChoice,
@@ -15,6 +17,7 @@ import {
   displayMyBookings,
   displayMakeBookings,
   displayRoomDetail,
+  displaySearchResult,
   renderLoginCheck,
 
 } from './domUpdates'
@@ -43,8 +46,7 @@ const sidebar = document.querySelector('.sidebar');
 const toMakeBookingBox = document.querySelector('.book-room');
 const toMyBookingsBox = document.querySelector('.my-booking');
 const toSpendingBox = document.querySelector('.spending');
-
-const myTripsBox = document.querySelector('.my-booking-details');
+// const myTripsBox = document.querySelector('.my-booking-details');
 
 // form
 const loginForm = document.querySelector('.login-view form');
@@ -58,6 +60,7 @@ let roomsData;
 let bookingsData;
 let currentUser;
 
+
 const start = () => {
   Promise.all([getDataByFetch('customers'), getDataByFetch('rooms'), getDataByFetch('bookings')]).then((data) => {
     userData = data[0].customers;
@@ -70,6 +73,7 @@ const start = () => {
 
 // event listeners
 window.addEventListener('load', start);
+
 customerButton.addEventListener('click', e => {
   displayLogIn();
 });
@@ -89,7 +93,6 @@ loginButton.addEventListener('click', e => {
     currentUser = userData.find(user => user.id === parseInt(usernameInput.value.substring(8)));
   } 
   renderLoginCheck(userData);
-
 });
 
 toMyBookingsBox.addEventListener('click', e => {
@@ -97,7 +100,7 @@ toMyBookingsBox.addEventListener('click', e => {
 });
 
 toMakeBookingBox.addEventListener('click', e => {
-  displayMakeBookings();
+  displayMakeBookings(e, bookingsData, roomsData);
 });
 
 homeButton.addEventListener('click', e => {
@@ -109,8 +112,31 @@ myBookingsViewButton.addEventListener('click', e => {
 });
 
 makeBookingViewButton.addEventListener('click', e => {
-  displayMakeBookings();
+  displayMakeBookings(e, bookingsData, roomsData);
 });
+
+makeBookingView.addEventListener('click', e => {
+  if (e.target.id === "search-rooms-button") {
+    e.preventDefault();
+    displaySearchResult(bookingsData, roomsData);
+  }
+
+  if (e.target.classList.contains('book-this-room-button')) {
+    e.preventDefault();
+    let date = getChosenDate();
+    let userID = currentUser.id;
+    let roomNumber = parseInt(e.target.id);
+    
+    let bookingToAdd = {
+      userID, 
+      date, 
+      roomNumber};
+      
+    addNewBooking(bookingToAdd);
+
+  }
+});
+
 
 
 
@@ -129,7 +155,7 @@ export {
   passwordInput,
   invalidPasswordText,
   invalidUserText,
-  myTripsBox,
+  // myTripsBox,
   homeButton,
   myBookingsViewButton,
   makeBookingViewButton,
