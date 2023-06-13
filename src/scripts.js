@@ -62,11 +62,13 @@ let currentUser;
 
 
 const start = () => {
-  Promise.all([getDataByFetch('customers'), getDataByFetch('rooms'), getDataByFetch('bookings')]).then((data) => {
+  Promise.all([getDataByFetch('customers'), getDataByFetch('rooms'), getDataByFetch('bookings')])
+  .then((data) => {
     userData = data[0].customers;
     roomsData = data[1].rooms;
     bookingsData = data[2].bookings;
    
+    
     // renderRecipeCards(mainViewCardContainer, recipeData, currentUser);
   });
 };
@@ -96,7 +98,7 @@ loginButton.addEventListener('click', e => {
 });
 
 toMyBookingsBox.addEventListener('click', e => {
-  displayMyBookings(bookingsData, currentUser);
+  displayMyBookings(bookingsData, roomsData, currentUser);
 });
 
 toMakeBookingBox.addEventListener('click', e => {
@@ -108,7 +110,7 @@ homeButton.addEventListener('click', e => {
 });
 
 myBookingsViewButton.addEventListener('click', e => {
-  displayMyBookings(bookingsData, currentUser);
+  displayMyBookings(bookingsData, roomsData, currentUser);
 });
 
 makeBookingViewButton.addEventListener('click', e => {
@@ -131,8 +133,13 @@ makeBookingView.addEventListener('click', e => {
       userID, 
       date, 
       roomNumber};
-      
-    addNewBooking(bookingToAdd);
+    
+    if (date && date.length) {
+      addNewBooking(bookingToAdd);
+      e.target.disabled = true;
+      start();
+      setTimeout(() => alert('You\'ve successfully booked this room!'), 1000);
+    }
 
   }
 });

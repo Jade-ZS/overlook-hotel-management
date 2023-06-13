@@ -84,29 +84,36 @@ const renderHomeSidebard = (user) => {
 
 
 // my bookings
-const renderSingleBookingItem = (booking) => {
+const checkBidet = room => {
+  if (room.bidet) {
+    return 'with bidet';
+  } else {
+    return 'without bidet';
+  }
+};
+
+const renderSingleBookingItem = (booking, rooms) => {
+  const room = rooms.find(room => room.number === booking.roomNumber)
   const singleBooking = `
     <tr class=booking-item id=${booking.id}> 
       <td class=info-item>${booking.date}</td>
       <td class=info-item>${booking.id}</td>
-      <td class=info-item>cost</td>
-      <td class=info-item>room type</td>
-      <td>
-        <button class=view-room-details-button>click to view room details</button>
-      </td>
+      <td class=info-item>${room.costPerNight}</td>
+      <td class=info-item>${room.roomType}</td>
+      <td class=info-item>room #${room.number}: ${room.numBeds} × ${room.bedSize} size 🛏️ ${checkBidet(room)} </td>
     </tr>
   `;
   return singleBooking;
 };
 
-const renderBookingItems = (bookings, currentUser) => {
+const renderBookingItems = (bookings, rooms, currentUser) => {
   const myBookings = bookings.filter(booking => booking.userID === currentUser.id);
   let bookingItems = '';
-  myBookings.forEach(booking => bookingItems += renderSingleBookingItem(booking));
+  myBookings.forEach(booking => bookingItems += renderSingleBookingItem(booking, rooms));
   return bookingItems;
 };
 
-const renderMyBookings = (bookings, currentUser) => {
+const renderMyBookings = (bookings, rooms, currentUser) => {
   myBookingsView.innerHTML = `
     <article class="flex-item header">My Bookings</article>
     <div class="tableFixHead flex-item column-flex-container my-booking-info-box">
@@ -117,11 +124,11 @@ const renderMyBookings = (bookings, currentUser) => {
               <th>Order Number</th>
               <th>Cost</th>
               <th>Room Type</th>
-              <th></th>
+              <th>Details</th>
             </tr>
           </thead>
           <tbody>
-            ${renderBookingItems(bookings, currentUser)} 
+            ${renderBookingItems(bookings, rooms, currentUser)} 
           </tbody>
         </table>
     </div>
@@ -242,14 +249,14 @@ const displayCustomerDashboard = () => {
   
 };
 
-const displayMyBookings = (bookings, currentUser) => {
+const displayMyBookings = (bookings, rooms, currentUser) => {
   const itemsToHide = [roleChoiceView, loginView, customerDashboard, makeBookingView, roomDetailView];
   const itemsToShow = [sidebar, myBookingsView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 
   clearView([myBookingsView]);
-  renderMyBookings(bookings, currentUser);
+  renderMyBookings(bookings, rooms, currentUser);
 };
 
 const getChosenDate = () => {
