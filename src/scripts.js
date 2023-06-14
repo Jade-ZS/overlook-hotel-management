@@ -135,14 +135,13 @@ makeBookingView.addEventListener('click', e => {
       roomNumber};
     
     if (date && date.length) {
-      addNewBooking(bookingToAdd)
-      .then(() => {
-        spending += parseInt(roomsData.find(room => room.number === roomNumber).costPerNight);
-        e.target.disabled = true;
-        start();
-        setTimeout(() => alert('You\'ve successfully booked this room!'), 1000);
-      });
+      addNewBooking(bookingToAdd);
+      spending += parseInt(roomsData.find(room => room.number === roomNumber).costPerNight);
+      e.target.disabled = true;
+      start();
+      setTimeout(() => alert('You\'ve successfully booked this room!'), 1000);
     }
+
   }
 });
 
