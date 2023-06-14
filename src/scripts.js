@@ -23,6 +23,7 @@ import {
 } from './domUpdates'
 
 // customer views
+const main = document.querySelector('main');
 const roleChoiceView = document.querySelector('.role-choice-view');
 const loginView = document.querySelector('.login-view');
 const customerDashboard = document.querySelector('.customer-dashboard-view');
@@ -160,4 +161,5 @@ export {
   makeBookingViewButton,
   spendingBox,
   userInfo,
+  main
 };
