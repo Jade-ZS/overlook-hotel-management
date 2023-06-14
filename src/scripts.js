@@ -2,7 +2,6 @@ import './css/styles.css';
 import './images/turing-logo.png';
 import { 
   getDataByFetch, 
-  addNewBooking, 
 } from './api-calls';
 
 import {
@@ -11,16 +10,14 @@ import {
 
 import {
   login,
-  getChosenDate,
   displayRoleChoice,
   displayLogIn,
   displayCustomerDashboard,
   displayMyBookings,
   displayMakeBookings,
   displaySearchResult,
-  renderLoginCheck,
-  renderUserInfo,
   getCurrentUser,
+  makeNewBooking,
 
 } from './domUpdates'
 
@@ -51,7 +48,6 @@ const start = () => {
   Promise.all([getDataByFetch('customers'), getDataByFetch('rooms'), getDataByFetch('bookings')])
   .then((data) => {
     userData = data[0].customers;
-    console.log('length: ', userData.length)
     roomsData = data[1].rooms;
     bookingsData = data[2].bookings;
     spending = getTotalSpending(bookingsData, roomsData);
@@ -84,35 +80,17 @@ window.addEventListener('click', e => {
   if (e.target.id === 'book-a-room-view-button' || e.target.classList.contains('book-room')) {
     displayMakeBookings(e, bookingsData, roomsData);
   }
-});
-
-makeBookingView.addEventListener('click', e => {
   if (e.target.id === "search-rooms-button") {
     e.preventDefault();
     displaySearchResult(bookingsData, roomsData);
   }
-
   if (e.target.classList.contains('book-this-room-button')) {
     e.preventDefault();
-    let date = getChosenDate();
-    let userID = currentUser.id;
-    let roomNumber = parseInt(e.target.id);
-    
-    let bookingToAdd = {
-      userID, 
-      date, 
-      roomNumber};
-    
-    if (date && date.length) {
-      addNewBooking(bookingToAdd).then(() => {
-        spending += parseInt(roomsData.find(room => room.number === roomNumber).costPerNight);
-        e.target.disabled = true;
-        start();
-        alert('You\'ve successfully booked this room!');
-      }).catch(() => alert('Booking was failed.'));
-    }
+    makeNewBooking(e, currentUser, roomsData, spending);
   }
 });
+
+
 
 export {
   roleChoiceView,
@@ -125,5 +103,6 @@ export {
   myBookingsViewButton,
   makeBookingViewButton,
   spendingBox,
-  main
+  main,
+  start,
 };

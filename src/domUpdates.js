@@ -7,7 +7,12 @@ import {
   sidebar,
   spendingBox,
   main,
+  start,
 } from './scripts';
+
+import { 
+  addNewBooking, 
+} from './api-calls';
 
 import {
   getTotalSpending
@@ -123,7 +128,6 @@ const getCurrentUser = (userData) => {
 
 const login = (e, roomsData, bookingsData, userData, currentUser) => {
   e.preventDefault();
-  const loginForm = document.querySelector('.login-view form');
   const usernameInput = document.querySelector('#username');
   const passwordInput = document.querySelector('#password');
   const invalidUserText = document.querySelector('#invalid-username-text');
@@ -221,6 +225,28 @@ const renderMyBookings = (bookings, rooms, currentUser) => {
 };
 
 // make bookings view
+const getChosenDate = () => {
+  const dateInput = document.querySelector('#date');
+  if (!dateInput.value.length) {
+    alert('date input can not be empty!');
+    return 
+  }
+  return dateInput.value.split('-').join('/');
+};
+
+const getAvailableRooms = (bookings, rooms) => {
+  const date = getChosenDate();
+  if (!date) {
+    return; 
+  }
+  let availableRooms = getRoomByDate(date, bookings, rooms);
+  const roomTypeInput = document.querySelector('#room-type');
+  if (roomTypeInput.value !== 'all') {
+    availableRooms = getRoomByType(roomTypeInput.value, availableRooms);
+  }
+  return availableRooms;
+};
+
 const renderSearchBox = () => {
   const searchBox = `
     <form action="">
@@ -302,6 +328,33 @@ const renderMakeBookings = (rooms) => {
   `;
 };
 
+const getDataToPost = (e, currentUser) => {
+  let date = getChosenDate();
+  let userID = currentUser.id;
+  let roomNumber = parseInt(e.target.id);
+  
+  let bookingToAdd = {
+    userID, 
+    date, 
+    roomNumber};
+
+  return bookingToAdd;
+};
+
+const makeNewBooking = (e, currentUser, roomsData, spending) => {
+  const bookingToAdd = getDataToPost(e, currentUser);
+  if (bookingToAdd.date && bookingToAdd.date.length) {
+    addNewBooking(bookingToAdd)
+    .then(() => {
+      spending += parseInt(roomsData.find(room => room.number === bookingToAdd.roomNumber).costPerNight);
+      e.target.disabled = true;
+      start();
+      alert('You\'ve successfully booked this room!');
+    })
+    .catch(() => alert('Booking was failed.'));
+  }
+};
+
  // displays
  const displayRoleChoice = (view) => {
   const itemsToHide = [main, sidebar, loginView, customerDashboard, myBookingsView, makeBookingView];
@@ -340,28 +393,6 @@ const displayMyBookings = (bookings, rooms, currentUser) => {
   renderMyBookings(bookings, rooms, currentUser);
 };
 
-const getChosenDate = () => {
-  const dateInput = document.querySelector('#date');
-  if (!dateInput.value.length) {
-    alert('date input can not be empty!');
-    return 
-  }
-  return dateInput.value.split('-').join('/');
-};
-
-const getAvailableRooms = (bookings, rooms) => {
-  const date = getChosenDate();
-  if (!date) {
-    return; 
-  }
-  let availableRooms = getRoomByDate(date, bookings, rooms);
-  const roomTypeInput = document.querySelector('#room-type');
-  if (roomTypeInput.value !== 'all') {
-    availableRooms = getRoomByType(roomTypeInput.value, availableRooms);
-  }
-  return availableRooms;
-}
-
 const displayMakeBookings = (e, bookings, rooms) => {
   const itemsToHide = [roleChoiceView, loginView, myBookingsView, customerDashboard];
   const itemsToShow = [main, sidebar, makeBookingView];
@@ -388,8 +419,6 @@ const displaySearchResult = (bookings, rooms) => {
 };
 
 export {
-  getChosenDate,
-  getAvailableRooms,
   displayRoleChoice,
   displayLogIn,
   displayCustomerDashboard,
@@ -397,8 +426,7 @@ export {
   displayMakeBookings,
   displayRoomDetail,
   displaySearchResult,
-  renderLoginCheck,
-  renderUserInfo,
   login,
   getCurrentUser,
+  makeNewBooking,
 };
