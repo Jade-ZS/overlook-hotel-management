@@ -103,6 +103,17 @@ aside {
   text-align: center;
 }
 
+aside button {
+  margin: 1px;
+  border: none;
+  background-color: #ced3c6;
+}
+
+aside button:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 5px;
+  background-color: #c1c8b7;
+}
+
 .box {
   background-color:#b5bda9;
 }
