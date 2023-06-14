@@ -18,6 +18,8 @@ aside {
   text-align: center;
 }
 
+
+
 /* flex */
 .view,
 .flex-container,
@@ -97,6 +99,15 @@ main.view {
   width: 5rem;
 }
 
+/* box */
+aside {
+  background-color: #ced3c6;
+}
+
+.box {
+  background-color:#b5bda9;
+}
+
 /* customer dashboard */
 .grid-container {
   display: grid;
@@ -122,11 +133,12 @@ main.view {
 aside,
 .grid-item,
 .flex-item {
-  border: solid 2pt black;
+  /* border: solid 2pt black; */
   border-radius: 15pt;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 article.my-booking:hover,
