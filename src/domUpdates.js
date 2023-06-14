@@ -10,9 +10,13 @@ import {
   invalidPasswordText,
   invalidUserText,
   spendingBox,
-  userInfo,
+  // userInfo,
   main,
 } from './scripts';
+
+import {
+  getTotalSpending
+} from './customer-dashboard';
 
 import {
   getRoomByDate,
@@ -37,51 +41,184 @@ const clearView = views => {
   views.forEach(view => view.innerHTML = '');
 };
 
-const renderLoginCheck = (userData) => {
-  let isValid = false;
-  let isValidName = checkUser(usernameInput.value, userData);
-  let isValidPassword = checkPassword(passwordInput.value, 'overlook2021');
-  invalidUserText.innerText = '';
-  invalidPasswordText.innerText = '';
+const renderRoleChoice = (view) => {
+  view.innerHTML = `
+    <h1 class="overlook-title center-text">Overlook</h1>
+    <p class="center-text">Are you a customer or a manager?</p>
+    <div class="flex-container">
+      <button id="customer-button">customer</button>
+      <button id="manager-button">manager</button>
+    </div>
+  `;
+};
 
-  if (!isValidName) {
-    invalidUserText.innerText = 'Invalid username';
-    changeView([invalidUserText], 'remove', 'hidden');
-  } 
+const renderLogin = (view) => {
+  view.innerHTML = `
+    <h1>Log In</h1>
+    <form>
+      <div class="card">
+        <div class="column-flex-container">
+          <label for="username" class="hidden">username</label>
+          <input id="username" type="text" name="username" placeholder="Enter username" required>
+          <span id="invalid-username-text" class="message hidden">Invalid username</span>
+        </div>
+        <div class="column-flex-container">
+          <label for="password" class="hidden">password</label>
+          <input id="password" name="password" type="password" placeholder="Password" required>
+          <span id="invalid-password-text" class="message hidden">Invalid password</span>
+        </div>
+        <button id='login-button' type="submit">Submit</button>
+      </div>
+    </form>
+    <p id="back-to-roles">>>> Back to the last page</p>
+ `;
+};
+
+const checkIfEmpty = input => {
+  if (!input.value.length) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const renderEmptyWarning = (input, textBox) => {
+  clearView([textBox]);
+  changeView([textBox], 'remove', 'hidden');
+  textBox.innerText = `${input.id} can\'t be empty`;
   
-  if (!isValidPassword) {
-    invalidPasswordText.innerText = 'Invalid password';
-    changeView([invalidPasswordText], 'remove', 'hidden');
+};
+
+const checkUserTEST = (username, userData) => {
+  console.log('checkusertest userData : ', userData)
+  const id =parseInt(username.substring(8));
+  const length = userData.length + 1;
+  if (id < length) {
+    return true;
+  } else {
+    return false;
   }
 
-  if (!usernameInput.value.length) {
-    changeView([invalidUserText], 'remove', 'hidden');
-    invalidUserText.innerText = 'username can\'t be empty';
-  } 
+};
+
+const checkIfValid = (input, userData) => {
+  console.log('checkIfValid userData: ', userData)
+  if (input.id === 'username') {
+    return checkUserTEST(input.value, userData);
+  } else if (input.id === 'password') {
+    return checkPassword(input.value, 'overlook2021');
+  }
+};
+
+const renderInvalidText = (input, textBox) => {
+  clearView([textBox]);
+  changeView([textBox], 'remove', 'hidden');
+  textBox.innerText = `Invalid ${input.id}`;
   
-  if (!passwordInput.value.length) {
-    changeView([invalidPasswordText], 'remove', 'hidden');
-    invalidPasswordText.innerText = 'password can\'t be empty';
-  }
+};
 
-  if (isValidName && isValidName) {
-    isValid = true;
-  }
+const loginCheck = (usernameInput, passwordInput, userData) => {
+  let ifUsernamePass = !checkIfEmpty(usernameInput) && checkIfValid(usernameInput, userData);
+  let ifPasswordPass = !checkIfEmpty(passwordInput) && checkIfValid(passwordInput, userData);
+  let ifPass = ifUsernamePass && ifPasswordPass;
+  return ifPass;
+};
 
-  return isValid;
+const renderLoginCheck = (input, userData, textBox) => {
+  if (checkIfEmpty(input)) {
+    renderEmptyWarning(input, textBox);
+  } else if (checkIfValid(input, userData)) {
+    renderInvalidText(input, userData, textBox);
+  }
+};
+
+// const renderLoginCheck = (userData, usernameInput, passwordInput, invalidUserText, invalidPasswordText) => {
+//   let isValid = false;
+//   let isValidName = checkUser(usernameInput.value, userData);
+//   let isValidPassword = checkPassword(passwordInput.value, 'overlook2021');
+//   invalidUserText.innerText = '';
+//   invalidPasswordText.innerText = '';
+
+//   if (!isValidName) {
+//     invalidUserText.innerText = 'Invalid username';
+//     changeView([invalidUserText], 'remove', 'hidden');
+//   } 
+  
+//   if (!isValidPassword) {
+//     invalidPasswordText.innerText = 'Invalid password';
+//     changeView([invalidPasswordText], 'remove', 'hidden');
+//   }
+
+//   if (!usernameInput.value.length) {
+//     changeView([invalidUserText], 'remove', 'hidden');
+//     invalidUserText.innerText = 'username can\'t be empty';
+//   } 
+  
+//   if (!passwordInput.value.length) {
+//     changeView([invalidPasswordText], 'remove', 'hidden');
+//     invalidPasswordText.innerText = 'password can\'t be empty';
+//   }
+
+//   if (isValidName && isValidName) {
+//     isValid = true;
+//   }
+
+//   return isValid;
+// };
+
+const getCurrentUser = (usernameInput, userData) => {
+  return userData.find(user => user.id === parseInt(usernameInput.value.substring(8)));
+};
+
+const login = (e, roomsData, bookingsData, userData, currentUser) => {
+  e.preventDefault();
+  // renderLogin(view);
+  const loginForm = document.querySelector('.login-view form');
+  const usernameInput = document.querySelector('#username');
+  const passwordInput = document.querySelector('#password');
+  const invalidUserText = document.querySelector('#invalid-username-text');
+  const invalidPasswordText = document.querySelector('#invalid-password-text');
+
+  console.log(usernameInput.value)
+  if (!loginCheck(usernameInput, passwordInput, userData)) {
+    console.log('here')
+    renderLoginCheck(usernameInput, userData, invalidUserText);
+    renderLoginCheck(passwordInput, userData, invalidPasswordText);
+  } else {
+    currentUser = getCurrentUser(usernameInput, userData);
+    displayCustomerDashboard(bookingsData, roomsData, currentUser);
+  }
+};
+
+const renderSidebar = (view) => {
+  view.innerHTML = `
+    <p class="user-info">my profile</p>
+    <button id="home-button">Home</button>
+    <button id="my-bookings-view-button">My Bookings</button>
+    <button id="book-a-room-view-button">Book A Room</button>
+    <button id="log-out-button">Log Out</button>
+  `;
 };
 
 // customer dashboard
-const renderSpendingBox = (spending) => {
+const renderSpendingBox = (bookingsData, roomsData) => {
+  const spending = getTotalSpending(bookingsData, roomsData);
   spendingBox.innerHTML = `Total Spending: $${spending}`;
 };
 
-const renderUserInfo = (user) => {
-  userInfo.innerHTML = `
+const renderUserInfo = (user, view) => {
+  view.innerHTML = `
     <h1>${user.name}</h1>
     <p>username: customer${user.id}</p>
   `;
 }
+
+const renderCustomerDashboard = (bookingsData, roomsData, currentUser) => {
+  renderSidebar(sidebar);
+  renderSpendingBox(bookingsData, roomsData);
+  const userInfo = document.querySelector('.user-info');
+  renderUserInfo(currentUser, userInfo);
+};
 
 // my bookings
 const checkBidet = room => {
@@ -220,27 +357,33 @@ const renderMakeBookings = (rooms) => {
 };
 
  // displays
- const displayRoleChoice = () => {
+ const displayRoleChoice = (view) => {
   const itemsToHide = [main, sidebar, loginView, customerDashboard, myBookingsView, makeBookingView];
   const itemsToShow = [roleChoiceView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
+
+  renderRoleChoice(view);
 };
 
-const displayLogIn = () => {
+
+
+const displayLogIn = (view) => {
   const itemsToHide = [main, sidebar, roleChoiceView, customerDashboard, myBookingsView, makeBookingView];
   const itemsToShow = [loginView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
+
+  renderLogin(view);
 };
 
-const displayCustomerDashboard = (spending) => {
+const displayCustomerDashboard = (bookingsData, roomsData, currentUser) => {
   const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView];
   const itemsToShow = [main, sidebar, customerDashboard];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
   
-  renderSpendingBox(spending);
+  renderCustomerDashboard(bookingsData, roomsData, currentUser);
 };
 
 const displayMyBookings = (bookings, rooms, currentUser) => {
@@ -306,9 +449,6 @@ const displaySearchResult = (bookings, rooms) => {
   searchResultBox.innerHTML = renderResultBox(availableRooms);
 };
 
-
-
-
 export {
   getChosenDate,
   getAvailableRooms,
@@ -321,4 +461,5 @@ export {
   displaySearchResult,
   renderLoginCheck,
   renderUserInfo,
+  login
 };
