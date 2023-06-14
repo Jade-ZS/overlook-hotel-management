@@ -97,6 +97,27 @@ main.view {
   width: 5rem;
 }
 
+/* box */
+aside {
+  background-color: #ced3c6;
+  text-align: center;
+}
+
+aside button {
+  margin: 1px;
+  border: none;
+  background-color: #ced3c6;
+}
+
+aside button:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 5px;
+  background-color: #c1c8b7;
+}
+
+.box {
+  background-color:#b5bda9;
+}
+
 /* customer dashboard */
 .grid-container {
   display: grid;
@@ -122,11 +143,15 @@ main.view {
 aside,
 .grid-item,
 .flex-item {
-  border: solid 2pt black;
   border-radius: 15pt;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+aside.grid-item {
+  align-items: stretch;
 }
 
 article.my-booking:hover,
@@ -145,18 +170,6 @@ article.book-room:hover {
 
 .my-booking-info-box {
   height: 80vh;
-}
-
-.scroll-box {
-  width: 95%;
-  display: grid;
-  align-items: center;
-  grid-auto-flow: row;
-  grid-auto-rows: 10%; 
-  grid-template-columns: unset; 
-  grid-template-rows: unset;
-  overflow: scroll;
-  padding: 20pt;
 }
 
 /* table */
