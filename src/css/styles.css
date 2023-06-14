@@ -133,7 +133,6 @@ aside {
 aside,
 .grid-item,
 .flex-item {
-  /* border: solid 2pt black; */
   border-radius: 15pt;
   display: flex;
   justify-content: center;
