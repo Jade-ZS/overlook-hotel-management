@@ -116,7 +116,7 @@ const renderBookingItems = (bookings, rooms, currentUser) => {
 const renderMyBookings = (bookings, rooms, currentUser) => {
   myBookingsView.innerHTML = `
     <article class="flex-item header">My Bookings</article>
-    <div class="tableFixHead flex-item column-flex-container my-booking-info-box">
+    <div class="tableFixHead my-booking-info-box">
         <table>
           <thead>
             <tr>
