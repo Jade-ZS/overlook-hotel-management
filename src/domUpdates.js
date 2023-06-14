@@ -5,12 +5,7 @@ import {
   myBookingsView,
   makeBookingView,
   sidebar,
-  usernameInput,
-  passwordInput,
-  invalidPasswordText,
-  invalidUserText,
   spendingBox,
-  // userInfo,
   main,
 } from './scripts';
 
@@ -41,6 +36,7 @@ const clearView = views => {
   views.forEach(view => view.innerHTML = '');
 };
 
+// role choice view
 const renderRoleChoice = (view) => {
   view.innerHTML = `
     <h1 class="overlook-title center-text">Overlook</h1>
@@ -52,6 +48,7 @@ const renderRoleChoice = (view) => {
   `;
 };
 
+// log in
 const renderLogin = (view) => {
   view.innerHTML = `
     <h1>Log In</h1>
@@ -89,22 +86,9 @@ const renderEmptyWarning = (input, textBox) => {
   
 };
 
-const checkUserTEST = (username, userData) => {
-  console.log('checkusertest userData : ', userData)
-  const id =parseInt(username.substring(8));
-  const length = userData.length + 1;
-  if (id < length) {
-    return true;
-  } else {
-    return false;
-  }
-
-};
-
 const checkIfValid = (input, userData) => {
-  console.log('checkIfValid userData: ', userData)
   if (input.id === 'username') {
-    return checkUserTEST(input.value, userData);
+    return checkUser(input.value, userData);
   } else if (input.id === 'password') {
     return checkPassword(input.value, 'overlook2021');
   }
@@ -132,64 +116,28 @@ const renderLoginCheck = (input, userData, textBox) => {
   }
 };
 
-// const renderLoginCheck = (userData, usernameInput, passwordInput, invalidUserText, invalidPasswordText) => {
-//   let isValid = false;
-//   let isValidName = checkUser(usernameInput.value, userData);
-//   let isValidPassword = checkPassword(passwordInput.value, 'overlook2021');
-//   invalidUserText.innerText = '';
-//   invalidPasswordText.innerText = '';
-
-//   if (!isValidName) {
-//     invalidUserText.innerText = 'Invalid username';
-//     changeView([invalidUserText], 'remove', 'hidden');
-//   } 
-  
-//   if (!isValidPassword) {
-//     invalidPasswordText.innerText = 'Invalid password';
-//     changeView([invalidPasswordText], 'remove', 'hidden');
-//   }
-
-//   if (!usernameInput.value.length) {
-//     changeView([invalidUserText], 'remove', 'hidden');
-//     invalidUserText.innerText = 'username can\'t be empty';
-//   } 
-  
-//   if (!passwordInput.value.length) {
-//     changeView([invalidPasswordText], 'remove', 'hidden');
-//     invalidPasswordText.innerText = 'password can\'t be empty';
-//   }
-
-//   if (isValidName && isValidName) {
-//     isValid = true;
-//   }
-
-//   return isValid;
-// };
-
-const getCurrentUser = (usernameInput, userData) => {
+const getCurrentUser = (userData) => {
+  const usernameInput = document.querySelector('#username');
   return userData.find(user => user.id === parseInt(usernameInput.value.substring(8)));
 };
 
 const login = (e, roomsData, bookingsData, userData, currentUser) => {
   e.preventDefault();
-  // renderLogin(view);
   const loginForm = document.querySelector('.login-view form');
   const usernameInput = document.querySelector('#username');
   const passwordInput = document.querySelector('#password');
   const invalidUserText = document.querySelector('#invalid-username-text');
   const invalidPasswordText = document.querySelector('#invalid-password-text');
 
-  console.log(usernameInput.value)
   if (!loginCheck(usernameInput, passwordInput, userData)) {
-    console.log('here')
     renderLoginCheck(usernameInput, userData, invalidUserText);
     renderLoginCheck(passwordInput, userData, invalidPasswordText);
   } else {
-    currentUser = getCurrentUser(usernameInput, userData);
     displayCustomerDashboard(bookingsData, roomsData, currentUser);
   }
 };
 
+// side bar
 const renderSidebar = (view) => {
   view.innerHTML = `
     <p class="user-info">my profile</p>
@@ -272,7 +220,6 @@ const renderMyBookings = (bookings, rooms, currentUser) => {
   `;
 };
 
-
 // make bookings view
 const renderSearchBox = () => {
   const searchBox = `
@@ -294,7 +241,6 @@ const renderSearchBox = () => {
   `;
   return searchBox;
 };
-
 
 const renderSingleRoomItem = (room) => {
   const singleRoom = `
@@ -366,8 +312,6 @@ const renderMakeBookings = (rooms) => {
   renderRoleChoice(view);
 };
 
-
-
 const displayLogIn = (view) => {
   const itemsToHide = [main, sidebar, roleChoiceView, customerDashboard, myBookingsView, makeBookingView];
   const itemsToShow = [loginView];
@@ -410,14 +354,11 @@ const getAvailableRooms = (bookings, rooms) => {
   if (!date) {
     return; 
   }
-  
   let availableRooms = getRoomByDate(date, bookings, rooms);
-  
   const roomTypeInput = document.querySelector('#room-type');
   if (roomTypeInput.value !== 'all') {
     availableRooms = getRoomByType(roomTypeInput.value, availableRooms);
   }
-
   return availableRooms;
 }
 
@@ -428,7 +369,6 @@ const displayMakeBookings = (e, bookings, rooms) => {
   changeView(itemsToShow, 'remove', 'hidden');
 
   clearView([makeBookingView]);
-
   renderMakeBookings(rooms);
   
 };
@@ -438,8 +378,6 @@ const displayRoomDetail = () => {
   const itemsToShow = [main, sidebar];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
-
-  
 };
 
 const displaySearchResult = (bookings, rooms) => {
@@ -461,5 +399,6 @@ export {
   displaySearchResult,
   renderLoginCheck,
   renderUserInfo,
-  login
+  login,
+  getCurrentUser,
 };
