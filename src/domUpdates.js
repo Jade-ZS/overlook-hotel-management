@@ -221,14 +221,14 @@ const renderMakeBookings = (rooms) => {
 
  // displays
  const displayRoleChoice = () => {
-  const itemsToHide = [sidebar, loginView, customerDashboard, myBookingsView, makeBookingView];
+  const itemsToHide = [main, sidebar, loginView, customerDashboard, myBookingsView, makeBookingView];
   const itemsToShow = [roleChoiceView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 };
 
 const displayLogIn = () => {
-  const itemsToHide = [sidebar, roleChoiceView, customerDashboard, myBookingsView, makeBookingView];
+  const itemsToHide = [main, sidebar, roleChoiceView, customerDashboard, myBookingsView, makeBookingView];
   const itemsToShow = [loginView];
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
