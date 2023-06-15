@@ -173,21 +173,23 @@ aside button:hover {
 .card {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  height: 20vh;
+  height: 20rem;
   width: 10vw;;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .card img {
-  height: 10pt;
+  height: 20pt;
 }
 
 .cards-container {
   height: 50vh;
   overflow: scroll;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 /* book room view */
 .grid-item.book-room {

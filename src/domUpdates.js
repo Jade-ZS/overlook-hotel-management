@@ -212,9 +212,9 @@ const renderSingleCard = (room) => {
   return `
     <div class="card" id="${room.number}">
       ${getRoomImg(room)}
-      <p>${room.roomType}<p>
-      <p>${room.bedSize} X ${room.numBeds}<p>
-      <p>${room.costPerNight}<p>
+      <span>${room.roomType}</span>
+      <span>${room.bedSize} X ${room.numBeds}</span>
+      <span>${room.costPerNight}</span>
       <button>view details</button>
     </div>
   `;
