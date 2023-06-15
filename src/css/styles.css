@@ -169,6 +169,26 @@ aside button:hover {
   width: 34vw;
 }
 
+/* card */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 20vh;
+  width: 10vw;;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card img {
+  height: 10pt;
+}
+
+.cards-container {
+  height: 50vh;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+}
 /* book room view */
 .grid-item.book-room {
   grid-column: 1/3;

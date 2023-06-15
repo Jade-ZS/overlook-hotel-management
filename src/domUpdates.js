@@ -226,7 +226,6 @@ const renderCardCollection = (container, roomsData) => {
   roomsData.forEach(room => cards += renderSingleCard(room));
   container.innerHTML += `
     <div class = "cards-container">
-    <img src="images/turing-logo.png">
       ${cards}
     </div>
   `;
