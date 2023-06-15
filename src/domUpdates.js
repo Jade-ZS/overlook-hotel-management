@@ -58,7 +58,7 @@ const renderLogin = (view) => {
   view.innerHTML = `
     <h1>Log In</h1>
     <form>
-      <div class="card">
+      <div class="login-box">
         <div class="column-flex-container">
           <label for="username" class="hidden">username</label>
           <input id="username" type="text" name="username" placeholder="Enter username" required>
@@ -198,6 +198,49 @@ const renderCustomerDashboard = (bookingsData, roomsData, currentUser) => {
   const userInfo = document.querySelector('.user-info');
   renderUserInfo(currentUser, userInfo);
 };
+
+// --------------------------------------
+// home cards
+const getRoomImg = (room) => {
+  const imgName = `${room.roomType.replace(' ', '-')}-${room.numBeds}-${room.bedSize}`;
+  console.log(imgName)
+  return `<img src="images/${imgName}.jpeg" alt="${imgName}" >`;
+};
+
+const renderSingleCard = (room) => {
+  return `
+    <div class="card" id="${room.number}">
+      ${getRoomImg(room)}
+      <p>${room.roomType}<p>
+      <p>${room.bedSize} X ${room.numBeds}<p>
+      <p>${room.costPerNight}<p>
+      <button>view details</button>
+    </div>
+  `;
+};
+
+const renderCardCollection = (container, roomsData) => {
+  console.log('roomsData', roomsData)
+  console.log('here')
+  clearView([container]);
+  //  TO DO
+  let cards = '';
+  container.innerHTML = '';
+  roomsData.forEach(room => cards += renderSingleCard(room));
+  container.innerHTML += `
+    <div class = "cards-container">
+    <img src="images/turing-logo.png">
+      ${cards}
+    </div>
+  `;
+};
+
+const renderRoomDetails = () => {
+  `
+  `;
+};
+
+// ----------------------------------------
 
 // my bookings
 const checkBidet = room => {
@@ -458,4 +501,6 @@ export {
   login,
   getCurrentUser,
   makeNewBooking,
+  // test
+  renderCardCollection,
 };
