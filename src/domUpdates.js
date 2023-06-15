@@ -164,6 +164,21 @@ const renderSidebar = (view) => {
   `;
 };
 
+const renderSideButtonColor = (sidebar, index) => {
+  const buttons = [...sidebar.children];
+  buttons.forEach(button => {
+    button.classList.remove('noHover');
+    button.classList.remove('pressedButton');
+    button.classList.remove('light-green');
+  });
+  
+  // if (!main.lastElementChild.classList.contains('hidden')) {
+    buttons[index].classList.add('pressedButton');
+    buttons[index].classList.add('noHover');
+    buttons[index].classList.add('light-green')
+  // }
+};
+
 // customer dashboard
 const renderSpendingBox = (bookingsData, roomsData) => {
   const spending = getTotalSpending(bookingsData, roomsData);
@@ -393,6 +408,7 @@ const displayCustomerDashboard = (bookingsData, roomsData, currentUser) => {
   changeView(itemsToShow, 'remove', 'hidden');
   
   renderCustomerDashboard(bookingsData, roomsData, currentUser);
+  renderSideButtonColor(sidebar, 1);
 };
 
 const displayMyBookings = (bookings, rooms, currentUser) => {
@@ -403,6 +419,7 @@ const displayMyBookings = (bookings, rooms, currentUser) => {
 
   clearView([myBookingsView]);
   renderMyBookings(bookings, rooms, currentUser);
+  renderSideButtonColor(sidebar, 2);
 };
 
 const displayMakeBookings = (e, bookings, rooms) => {
@@ -413,7 +430,7 @@ const displayMakeBookings = (e, bookings, rooms) => {
 
   clearView([makeBookingView]);
   renderMakeBookings(rooms);
-  
+  renderSideButtonColor(sidebar, 3);
 };
 
 const displayRoomDetail = () => {

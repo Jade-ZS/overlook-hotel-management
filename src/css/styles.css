@@ -1,3 +1,16 @@
+/* color */
+.light-green {
+  background: #DADED4;
+}
+
+.light-greener {
+  background: #ced3c6;
+}
+
+.dark-green {
+  background: #164A41;
+}
+
 body {
   background:#DADED4;
 }
@@ -252,4 +265,12 @@ th {
 /* others */
 .hidden {
   display: none;
+}
+
+.noHover {
+  pointer-events: none;
+}
+
+.pressedButton {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
