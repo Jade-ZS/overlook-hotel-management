@@ -9,14 +9,17 @@ const errorHandling = (response) => {
 const processResponse = (response) => {
   let isErr = errorHandling(response);
   let output = isErr ? isErr : response.json();
-  console.log('output: ', output);
   return output;
 };
 
 const getDataByFetch = (path) => {
   return fetch(`http://localhost:3001/api/v1/${path}`)
   .then(response => processResponse(response))
-  .catch(err => alert(err));
+  .catch(() => {
+    const err = new Error('The server is down!');
+    alert(err);
+    throw err;
+  });
 };
 
 const addNewBooking = (data) => {
@@ -28,7 +31,6 @@ const addNewBooking = (data) => {
     }
   })
   .then(response => response.json())
-  .then(data => console.log(data))
 };
 
 const deleteSingleBooking = (id) => {
@@ -39,7 +41,10 @@ const deleteSingleBooking = (id) => {
     }
   })
   .then(response => processResponse(response))
-  .catch(err => alert(err));
+  .catch(err => {
+    alert('The delete was unsuccessful!');
+    throw new Error(err);
+  });
 };
 
 export { 
