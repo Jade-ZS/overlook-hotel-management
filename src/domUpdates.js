@@ -8,6 +8,7 @@ import {
   spendingBox,
   main,
   start,
+  exploreView
 } from './scripts';
 
 import { 
@@ -162,6 +163,8 @@ const renderSidebar = (view) => {
       <span class="icons material-symbols-outlined">logout</span>
       <span>Log Out</span>
     </button>
+
+    <button class='test'> To Delete </button>
   `;
 };
 
@@ -237,7 +240,31 @@ const renderRoomDetails = () => {
 };
 
 // ----------------------------------------
+// explore view
+const renderHeader = () => {
 
+};
+
+const renderCollections = () => {
+
+};
+
+const renderExploreView = () => {
+
+};
+
+const displayExploreView = (roomsData) => {
+  console.log('here')
+  const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView, customerDashboard];
+  const itemsToShow = [main, sidebar, exploreView];
+  changeView(itemsToHide, 'add', 'hidden');
+  changeView(itemsToShow, 'remove', 'hidden');
+
+  renderCardCollection(exploreView, roomsData);
+};
+
+
+// ----------------------------------------
 // my bookings
 const checkBidet = room => {
   if (room.bidet) {
@@ -499,4 +526,5 @@ export {
   makeNewBooking,
   // test
   renderCardCollection,
+  displayExploreView,
 };

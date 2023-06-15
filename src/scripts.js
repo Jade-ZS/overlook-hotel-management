@@ -37,6 +37,7 @@ import {
   getCurrentUser,
   makeNewBooking,
   renderCardCollection,
+  displayExploreView,
 
 } from './domUpdates'
 
@@ -47,6 +48,7 @@ const loginView = document.querySelector('.login-view');
 const customerDashboard = document.querySelector('.customer-dashboard-view');
 const myBookingsView = document.querySelector('.my-bookings-view');
 const makeBookingView = document.querySelector('.book-a-room-view');
+const exploreView = document.querySelector('.explore-view');
 
 // buttons
 const homeButton = document.querySelector('#home-button');
@@ -89,8 +91,8 @@ window.addEventListener('click', e => {
   if (e.target.id === 'login-button') {
     currentUser = getCurrentUser(userData);
     login(e, roomsData, bookingsData, userData, currentUser);
-    const test = document.querySelector('.test');
-    renderCardCollection(test, roomsData);
+    // const test = document.querySelector('.test');
+    // renderCardCollection(test, roomsData);
   }
   if (e.target.id === 'home-button') {
     displayCustomerDashboard(bookingsData, roomsData, currentUser);
@@ -109,6 +111,11 @@ window.addEventListener('click', e => {
     e.preventDefault();
     makeNewBooking(e, currentUser, roomsData, spending);
   }
+
+  // to delete
+  if (e.target.classList.contains('test')) {
+    displayExploreView(roomsData);
+  }
 });
 
 
@@ -126,4 +133,5 @@ export {
   spendingBox,
   main,
   start,
+  exploreView,
 };
