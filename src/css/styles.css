@@ -14,9 +14,28 @@ aside {
   width: 15rem;
 }
 
+aside button {
+  text-align: left;
+}
+
+aside button .icons {
+  padding-left: 50px;
+  padding-right: 10px;
+}
+
 .center-text {
   text-align: center;
 }
+
+/* icons */
+
+/* .material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+} */
 
 /* flex */
 .view,
@@ -107,6 +126,8 @@ aside button {
   margin: 1px;
   border: none;
   background-color: #ced3c6;
+  display: flex;
+  align-items: center;
 }
 
 aside button:hover {
@@ -153,6 +174,14 @@ aside,
 aside.grid-item {
   align-items: stretch;
 }
+
+#log-out-button {
+  position: absolute;
+  bottom: 0;
+  width: 15rem;
+  padding-bottom: 20pt;
+}
+
 
 article.my-booking:hover,
 article.book-room:hover {

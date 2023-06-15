@@ -145,10 +145,22 @@ const login = (e, roomsData, bookingsData, userData, currentUser) => {
 const renderSidebar = (view) => {
   view.innerHTML = `
     <p class="user-info">my profile</p>
-    <button id="home-button">Home</button>
-    <button id="my-bookings-view-button">My Bookings</button>
-    <button id="book-a-room-view-button">Book A Room</button>
-    <button id="log-out-button">Log Out</button>
+    <button id="home-button">
+      <span class="icons material-symbols-outlined">home</span>
+      <span>Home<span>
+    </button>
+    <button id="my-bookings-view-button">
+      <span class="icons material-symbols-outlined">menu_book</span>
+      <span>My Bookings</span>
+    </button>
+    <button id="book-a-room-view-button">
+      <span class="icons material-symbols-outlined">iframe</span>
+      <span>Book A Room</span>
+    </button>
+    <button id="log-out-button">
+      <span class="icons material-symbols-outlined">logout</span>
+      <span>Log Out</span>
+    </button>
   `;
 };
 
