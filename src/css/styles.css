@@ -53,14 +53,14 @@ aside button .icons {
 /* flex */
 .view,
 .flex-container,
-.card {
+.login-box {
   display: flex;
   justify-content: center;
 }
 
 .column-view,
 .column-flex-container,
-.card {
+.login-box {
   display: flex;
   flex-direction: column;
 }
@@ -110,7 +110,7 @@ main.view {
   opacity: 1;
 }
 
-.card {
+.login-box {
   background: #A3BCB6;
   opacity: 0.6;
   align-items: center;

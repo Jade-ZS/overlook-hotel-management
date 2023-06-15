@@ -1,5 +1,23 @@
 import './css/styles.css';
-import './images/turing-logo.png';
+import './images/junior-suite-1-king.jpg';
+import './images/junior-suite-1-queen.jpg';
+import './images/junior-suite-2-king.jpg';
+import './images/junior-suite-2-twin.jpg';
+import './images/residential-suite-1-full.jpg';
+import './images/residential-suite-1-queen.jpg';
+import './images/residential-suite-1-twin.jpg';
+import './images/residential-suite-2-queen.jpg';
+import './images/single-room-1-full.jpg';
+import './images/single-room-1-king.jpg';
+import './images/single-room-1-queen.jpg';
+import './images/single-room-1-twin.jpg';
+import './images/single-room-2-full.jpg';
+import './images/single-room-2-queen.jpg';
+import './images/single-room-2-twin.jpg';
+import './images/suite-1-queen.jpg';
+import './images/suite-1-twin.jpg';
+import './images/suite-2-full.jpg';
+
 import { 
   getDataByFetch, 
 } from './api-calls';
@@ -18,6 +36,7 @@ import {
   displaySearchResult,
   getCurrentUser,
   makeNewBooking,
+  renderCardCollection,
 
 } from './domUpdates'
 
@@ -70,6 +89,8 @@ window.addEventListener('click', e => {
   if (e.target.id === 'login-button') {
     currentUser = getCurrentUser(userData);
     login(e, roomsData, bookingsData, userData, currentUser);
+    const test = document.querySelector('.test');
+    renderCardCollection(test, roomsData);
   }
   if (e.target.id === 'home-button') {
     displayCustomerDashboard(bookingsData, roomsData, currentUser);

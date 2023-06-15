@@ -38,6 +38,7 @@ const changeView = (views, action, classToToggle) => {
 };
 
 const clearView = views => {
+  console.log('clearView: ', views)
   views.forEach(view => view.innerHTML = '');
 };
 
@@ -204,7 +205,7 @@ const renderCustomerDashboard = (bookingsData, roomsData, currentUser) => {
 const getRoomImg = (room) => {
   const imgName = `${room.roomType.replace(' ', '-')}-${room.numBeds}-${room.bedSize}`;
   console.log(imgName)
-  return `<img src="images/${imgName}.jpeg" alt="${imgName}" >`;
+  return `<img src="images/${imgName}.jpg" alt="${imgName}" >`;
 };
 
 const renderSingleCard = (room) => {
@@ -220,12 +221,8 @@ const renderSingleCard = (room) => {
 };
 
 const renderCardCollection = (container, roomsData) => {
-  console.log('roomsData', roomsData)
-  console.log('here')
   clearView([container]);
-  //  TO DO
   let cards = '';
-  container.innerHTML = '';
   roomsData.forEach(room => cards += renderSingleCard(room));
   container.innerHTML += `
     <div class = "cards-container">
