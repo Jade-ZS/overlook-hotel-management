@@ -191,6 +191,23 @@ aside button:hover {
   flex-wrap: wrap;
   gap: 10px;
 }
+
+/* explore view */
+.explore-view {
+  position: relative;
+}
+
+.header-image {
+  filter: brightness(50%);
+  /* position: relative; */
+}
+
+.header-text {
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: 100pt;
+}
 /* book room view */
 .grid-item.book-room {
   grid-column: 1/3;

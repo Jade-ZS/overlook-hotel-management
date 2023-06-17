@@ -223,15 +223,17 @@ const renderSingleCard = (room) => {
   `;
 };
 
-const renderCardCollection = (container, roomsData) => {
-  clearView([container]);
+const renderCardCollection = (/*container,*/ roomsData) => {
+  // clearView([container]);
   let cards = '';
   roomsData.forEach(room => cards += renderSingleCard(room));
-  container.innerHTML += `
-    <div class = "cards-container">
-      ${cards}
-    </div>
-  `;
+  // container.innerHTML += `
+  //   <div class = "cards-container">
+  //     ${cards}
+  //   </div>
+  // `;
+  return cards;
+  
 };
 
 const renderRoomDetails = () => {
@@ -239,18 +241,27 @@ const renderRoomDetails = () => {
   `;
 };
 
-// ----------------------------------------
 // explore view
 const renderHeader = () => {
-
+  return `
+    <img class="header-image" src="images/header.jpg" alt="header image">
+    <p class="header-text">Book Your Stay With OverLook</p>
+  `;
 };
 
-const renderCollections = () => {
+// const renderCollections = () => {
+//   return ``;
+// };
 
-};
-
-const renderExploreView = () => {
-
+const renderExploreView = (view, roomsData) => {
+  view.innerHTML = `
+    <div class="header">
+      ${renderHeader()}
+    </div>
+    <div class="cards-container">
+      ${renderCardCollection(roomsData)}
+    </div>
+  `;
 };
 
 const displayExploreView = (roomsData) => {
@@ -260,7 +271,8 @@ const displayExploreView = (roomsData) => {
   changeView(itemsToHide, 'add', 'hidden');
   changeView(itemsToShow, 'remove', 'hidden');
 
-  renderCardCollection(exploreView, roomsData);
+  // renderCardCollection(exploreView, roomsData);
+  renderExploreView(exploreView, roomsData);
 };
 
 

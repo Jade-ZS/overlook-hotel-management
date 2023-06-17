@@ -17,6 +17,7 @@ import './images/single-room-2-twin.jpg';
 import './images/suite-1-queen.jpg';
 import './images/suite-1-twin.jpg';
 import './images/suite-2-full.jpg';
+import './images/header.jpg';
 
 import { 
   getDataByFetch, 
