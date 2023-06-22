@@ -8,6 +8,7 @@ import {
   spendingBox,
   main,
   start,
+  exploreView
 } from './scripts';
 
 import { 
@@ -38,6 +39,7 @@ const changeView = (views, action, classToToggle) => {
 };
 
 const clearView = views => {
+  console.log('clearView: ', views)
   views.forEach(view => view.innerHTML = '');
 };
 
@@ -58,7 +60,7 @@ const renderLogin = (view) => {
   view.innerHTML = `
     <h1>Log In</h1>
     <form>
-      <div class="card">
+      <div class="login-box">
         <div class="column-flex-container">
           <label for="username" class="hidden">username</label>
           <input id="username" type="text" name="username" placeholder="Enter username" required>
@@ -161,6 +163,8 @@ const renderSidebar = (view) => {
       <span class="icons material-symbols-outlined">logout</span>
       <span>Log Out</span>
     </button>
+
+    <button class='test'> To Delete </button>
   `;
 };
 
@@ -199,6 +203,80 @@ const renderCustomerDashboard = (bookingsData, roomsData, currentUser) => {
   renderUserInfo(currentUser, userInfo);
 };
 
+// --------------------------------------
+// home cards
+const getRoomImg = (room) => {
+  const imgName = `${room.roomType.replace(' ', '-')}-${room.numBeds}-${room.bedSize}`;
+  console.log(imgName)
+  return `<img src="images/${imgName}.jpg" alt="${imgName}" >`;
+};
+
+const renderSingleCard = (room) => {
+  return `
+    <div class="card" id="${room.number}">
+      ${getRoomImg(room)}
+      <span>${room.roomType}</span>
+      <span>${room.bedSize} X ${room.numBeds}</span>
+      <span>${room.costPerNight}</span>
+      <button>view details</button>
+    </div>
+  `;
+};
+
+const renderCardCollection = (/*container,*/ roomsData) => {
+  // clearView([container]);
+  let cards = '';
+  roomsData.forEach(room => cards += renderSingleCard(room));
+  // container.innerHTML += `
+  //   <div class = "cards-container">
+  //     ${cards}
+  //   </div>
+  // `;
+  return cards;
+  
+};
+
+const renderRoomDetails = () => {
+  `
+  `;
+};
+
+// explore view
+const renderHeader = () => {
+  return `
+    <img class="header-image grid-item" src="images/header.jpg" alt="header image">
+    <p class="header-text grid-item">Book Your Stay With OverLook</p>
+  `;
+};
+
+// const renderCollections = () => {
+//   return ``;
+// };
+
+const renderExploreView = (view, roomsData) => {
+  view.innerHTML = `
+    <div class="header">
+      ${renderHeader()}
+    </div>
+    <div class="cards-container">
+      ${renderCardCollection(roomsData)}
+    </div>
+  `;
+};
+
+const displayExploreView = (roomsData) => {
+  console.log('here')
+  const itemsToHide = [roleChoiceView, loginView, myBookingsView, makeBookingView, customerDashboard];
+  const itemsToShow = [main, sidebar, exploreView];
+  changeView(itemsToHide, 'add', 'hidden');
+  changeView(itemsToShow, 'remove', 'hidden');
+
+  // renderCardCollection(exploreView, roomsData);
+  renderExploreView(exploreView, roomsData);
+};
+
+
+// ----------------------------------------
 // my bookings
 const checkBidet = room => {
   if (room.bidet) {
@@ -458,4 +536,7 @@ export {
   login,
   getCurrentUser,
   makeNewBooking,
+  // test
+  renderCardCollection,
+  displayExploreView,
 };
