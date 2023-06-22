@@ -244,8 +244,8 @@ const renderRoomDetails = () => {
 // explore view
 const renderHeader = () => {
   return `
-    <img class="header-image" src="images/header.jpg" alt="header image">
-    <p class="header-text">Book Your Stay With OverLook</p>
+    <img class="header-image grid-item" src="images/header.jpg" alt="header image">
+    <p class="header-text grid-item">Book Your Stay With OverLook</p>
   `;
 };
 
